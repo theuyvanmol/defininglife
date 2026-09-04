@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shop — DefiningLife Research Peptides</title>
+<meta name="description" content="Browse the full DefiningLife catalog of research peptides — filter by research area, search by name, every batch tested.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B2027; --ink-soft:#547079; --ink-dim:#8DA3A9;
+  --bg:#FBFDFC; --bg-2:#F2F8F6; --surface:#FFFFFF;
+  --brand:#155E7F; --brand-2:#3F86A8; --tint:#EAF3F1;
+  --line:rgba(11,32,39,0.10); --line-soft:rgba(11,32,39,0.06);
+  --shadow:0 24px 60px -24px rgba(11,32,39,0.18);
+  --ease:cubic-bezier(.16,.8,.24,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.015em;margin:0;color:var(--ink);}
+p{line-height:1.7;color:var(--ink-soft);margin:0;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+@media (max-width:640px){.wrap{padding:0 20px;}}
+::selection{background:rgba(21,94,127,.15);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.stagger>*{transition-delay:calc(var(--i,0)*70ms);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:8px;font-weight:600;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:var(--brand);box-shadow:var(--shadow);}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand);}
+
+header{position:fixed;top:0;left:0;right:0;z-index:60;padding:22px 0;transition:padding .35s var(--ease),background .35s,box-shadow .35s;}
+header.scrolled{padding:14px 0;background:rgba(251,253,252,0.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);}
+header .wrap{display:flex;align-items:center;justify-content:space-between;}
+.logo img{height:28px;width:auto;display:block;}
+nav.links{display:flex;align-items:center;gap:34px;}
+nav.links a{font-size:13.5px;font-weight:600;color:var(--ink-soft);position:relative;transition:color .25s;}
+nav.links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--brand);transition:width .3s var(--ease);}
+nav.links a:hover,nav.links a.active{color:var(--ink);}
+nav.links a:hover::after,nav.links a.active::after{width:100%;}
+.head-actions{display:flex;align-items:center;gap:14px;}
+.burger{display:none;width:38px;height:38px;border-radius:8px;border:1px solid var(--line);align-items:center;justify-content:center;background:none;cursor:pointer;}
+.burger span,.burger span::before,.burger span::after{content:"";display:block;width:14px;height:1.4px;background:var(--ink);position:relative;}
+.burger span::before{position:absolute;top:-5px;}.burger span::after{position:absolute;top:5px;}
+
+.page-hero{position:relative;padding:160px 0 70px;overflow:hidden;}
+.page-hero::before{content:"";position:absolute;top:-140px;right:-160px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(21,94,127,0.07),transparent 68%);}
+.page-hero .wrap{position:relative;}
+.crumb{font-size:12px;color:var(--ink-dim);margin-bottom:16px;}
+.crumb a{color:var(--ink-soft);}
+.crumb a:hover{color:var(--brand);}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--brand);margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);}
+.page-hero h1{font-size:clamp(32px,4.4vw,52px);line-height:1.08;max-width:700px;}
+.page-hero .sub{margin-top:18px;max-width:560px;font-size:16px;}
+
+section{padding:0 0 100px;}
+@media (max-width:768px){section{padding-bottom:70px;}}
+
+.prod-tools{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:36px;}
+.prod-search{flex:1;min-width:240px;position:relative;}
+.prod-search input{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:13px 20px 13px 42px;color:var(--ink);font-size:13.5px;outline:none;transition:border-color .3s;}
+.prod-search input:focus{border-color:var(--brand);}
+.prod-search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:16px;height:16px;opacity:.5;}
+.prod-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+.prod-tab{padding:9px 16px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--ink-soft);transition:.25s;white-space:nowrap;}
+.prod-tab.active,.prod-tab:hover{background:var(--brand);color:#fff;border-color:var(--brand);}
+
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+@media (max-width:1100px){.prod-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:820px){.prod-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:520px){.prod-grid{grid-template-columns:1fr;}}
+.prod-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s;}
+.prod-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--brand-2);}
+.prod-visual{height:200px;background:linear-gradient(160deg,var(--tint),var(--bg-2));display:flex;align-items:center;justify-content:center;position:relative;padding:14px;}
+.prod-visual img{height:100%;width:auto;max-width:100%;object-fit:contain;transition:transform .5s var(--ease);}
+.prod-card:hover .prod-visual img{transform:scale(1.06);}
+.prod-cat{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:#fff;padding:5px 9px;border-radius:20px;color:var(--brand);box-shadow:0 4px 12px rgba(11,32,39,.08);}
+.prod-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.prod-body h3{font-size:17px;font-weight:500;}
+.prod-body h3 .mg{font-family:'Inter';font-size:12px;font-weight:600;color:var(--ink-dim);}
+.prod-body .desc{font-size:12.5px;}
+.prod-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--line-soft);}
+.prod-price{font-family:'Fraunces';font-size:16px;}
+.prod-price span{font-size:11px;color:var(--ink-dim);font-family:'Inter';}
+.prod-link{width:34px;height:34px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;transition:.3s;}
+.prod-card:hover .prod-link{background:var(--brand);}
+.empty-state{display:none;text-align:center;padding:60px 20px;color:var(--ink-dim);}
+.empty-state.show{display:block;}
+
+.cta-band{background:linear-gradient(120deg,var(--brand),var(--brand-2));border-radius:24px;padding:52px 48px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;color:#fff;}
+.cta-band h3{font-size:clamp(22px,2.6vw,28px);color:#fff;}
+.cta-band p{color:rgba(255,255,255,.85);margin-top:8px;max-width:380px;}
+
+footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0 28px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px;padding-bottom:44px;border-bottom:1px solid var(--line);}
+@media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.foot-grid{grid-template-columns:1fr;}}
+.foot-brand p{margin-top:16px;color:var(--ink-dim);font-size:13px;max-width:270px;}
+footer h5{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px;font-weight:600;}
+footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+footer a{font-size:13.5px;color:var(--ink-soft);transition:color .25s;}
+footer a:hover{color:var(--brand);}
+.foot-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink-dim);}
+.foot-bottom .disc{max-width:720px;line-height:1.6;}
+
+#gate{position:fixed;inset:0;z-index:999;background:rgba(11,32,39,0.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;transition:opacity .5s,visibility .5s;}
+#gate.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.gate-card{max-width:460px;width:100%;background:#fff;border-radius:20px;padding:40px;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,.3);}
+.gate-mark{height:34px;margin:0 auto 22px;}
+.gate-card h2{font-size:22px;margin-bottom:12px;}
+.gate-card p{font-size:14px;margin-bottom:8px;}
+.gate-th{font-size:11.5px;color:var(--ink-dim);margin-top:14px;line-height:1.6;}
+.gate-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.gate-actions button{flex:1;min-width:150px;}
+
+#scrollbar{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--brand);z-index:1000;}
+</style>
+</head>
+<body>
+<div id="scrollbar"></div>
+
+<div id="gate">
+  <div class="gate-card">
+    <img class="gate-mark" src="images/logo/icon.png" alt="DefiningLife">
+    <h2>Research Use Only · 21+</h2>
+    <p>Everything supplied by <strong>DefiningLife</strong> is intended strictly for laboratory research. Not a drug, medicine, or dietary supplement — not for human or animal consumption.</p>
+    <p class="gate-th">By entering you confirm you are 21 years or older and purchasing solely for legitimate research purposes.</p>
+    <div class="gate-actions">
+      <button class="btn btn-ghost" onclick="window.location.href='https://www.google.com'">Leave site</button>
+      <button class="btn btn-primary" id="gateEnter">I'm 21+, Enter</button>
+    </div>
+  </div>
+</div>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="index.html" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife"></a>
+    <nav class="links" id="navLinks">
+      <a href="shop.html" class="active">Shop</a>
+      <a href="testing.html">Testing</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="head-actions">
+      <a href="shop.html" class="btn btn-primary" style="padding:11px 20px;font-size:13px;">Shop Pens</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Home</a> / Shop</div>
+    <div class="eyebrow">The Full Catalog</div>
+    <h1>23 research compounds, one certified source.</h1>
+    <p class="sub">Every vial is HPLC/MS tested and shipped sealed. Filter by research area or search by name.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="prod-tools">
+      <div class="prod-search">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#547079" stroke-width="1.6"/><path d="M21 21l-4.3-4.3" stroke="#547079" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <input type="text" id="prodSearch" placeholder="Search peptides, e.g. BPC-157…">
+      </div>
+      <div class="prod-tabs" id="prodTabs">
+        <div class="prod-tab active" data-f="all">All</div>
+        <div class="prod-tab" data-f="recovery">Recovery</div>
+        <div class="prod-tab" data-f="growth">Growth Hormone</div>
+        <div class="prod-tab" data-f="metabolic">Metabolic</div>
+        <div class="prod-tab" data-f="longevity">Longevity</div>
+        <div class="prod-tab" data-f="cognitive">Cognitive</div>
+        <div class="prod-tab" data-f="immune">Immune & Hormonal</div>
+        <div class="prod-tab" data-f="accessory">Accessories</div>
+      </div>
+    </div>
+
+    <div class="prod-grid stagger" id="prodGrid">
+      <div class="prod-card reveal" data-cat="recovery" style="--i:0">
+        <div class="prod-visual"><span class="prod-cat">Recovery</span>
+          <img src="images/products/bpc-157-10mg.webp" alt="DefiningLife BPC-157 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>BPC-157 <span class="mg">10mg</span></h3>
+          <p class="desc">Body Protection Compound — the reference standard for tissue-repair research.</p>
+          <div class="prod-foot"><div class="prod-price">$74<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="recovery" style="--i:1">
+        <div class="prod-visual"><span class="prod-cat">Recovery</span>
+          <img src="images/products/tb-500-5mg.webp" alt="DefiningLife TB-500 5mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>TB-500 <span class="mg">5mg</span></h3>
+          <p class="desc">Synthetic fragment of Thymosin Beta-4, studied for soft-tissue repair pathways.</p>
+          <div class="prod-foot"><div class="prod-price">$68<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="recovery" style="--i:2">
+        <div class="prod-visual"><span class="prod-cat">Skin & Repair</span>
+          <img src="images/products/ghk-cu-50mg.webp" alt="DefiningLife GHK-Cu 50mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>GHK-Cu <span class="mg">50mg</span></h3>
+          <p class="desc">Copper peptide studied for collagen signalling and dermal regeneration research.</p>
+          <div class="prod-foot"><div class="prod-price">$62<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="growth" style="--i:3">
+        <div class="prod-visual"><span class="prod-cat">Growth Hormone</span>
+          <img src="images/products/ipamorelin-10mg.webp" alt="DefiningLife Ipamorelin 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Ipamorelin <span class="mg">10mg</span></h3>
+          <p class="desc">Selective GH secretagogue researched for its clean receptor-binding profile.</p>
+          <div class="prod-foot"><div class="prod-price">$62<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="growth" style="--i:4">
+        <div class="prod-visual"><span class="prod-cat">Growth Hormone</span>
+          <img src="images/products/tesamorelin-10mg.webp" alt="DefiningLife Tesamorelin 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Tesamorelin <span class="mg">10mg</span></h3>
+          <p class="desc">GHRH analog studied for its effect on growth-hormone signalling pathways.</p>
+          <div class="prod-foot"><div class="prod-price">$86<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="growth" style="--i:5">
+        <div class="prod-visual"><span class="prod-cat">Growth Hormone</span>
+          <img src="images/products/cjc-1295-5mg.webp" alt="DefiningLife CJC-1295 5mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>CJC-1295 <span class="mg">5mg</span></h3>
+          <p class="desc">Long-acting GHRH analog, a mainstay of endocrine signalling research.</p>
+          <div class="prod-foot"><div class="prod-price">$64<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="growth" style="--i:0">
+        <div class="prod-visual"><span class="prod-cat">Growth Hormone</span>
+          <img src="images/products/igf-1-lr3-1mg.webp" alt="DefiningLife IGF-1 LR3 1mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>IGF-1 LR3 <span class="mg">1mg</span></h3>
+          <p class="desc">Long-acting analog of IGF-1 studied in cellular growth-signalling research.</p>
+          <div class="prod-foot"><div class="prod-price">$84<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="metabolic" style="--i:1">
+        <div class="prod-visual"><span class="prod-cat">Weight Management</span>
+          <img src="images/products/aod-9604-5mg.webp" alt="DefiningLife AOD-9604 5mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>AOD-9604 <span class="mg">5mg</span></h3>
+          <p class="desc">Synthetic hGH fragment (176–191), researched for lipolytic activity.</p>
+          <div class="prod-foot"><div class="prod-price">$66<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="metabolic" style="--i:2">
+        <div class="prod-visual"><span class="prod-cat">Weight Management</span>
+          <img src="images/products/slu-pp332-10mg.webp" alt="DefiningLife SLU-PP-332 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>SLU-PP-332 <span class="mg">10mg</span></h3>
+          <p class="desc">ERR agonist studied as an exercise-mimetic in metabolic research.</p>
+          <div class="prod-foot"><div class="prod-price">$118<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="metabolic" style="--i:3">
+        <div class="prod-visual"><span class="prod-cat">Weight Management</span>
+          <img src="images/products/5-amino-1mq-5mg.webp" alt="DefiningLife 5-Amino-1MQ 5mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>5-Amino-1MQ <span class="mg">5mg</span></h3>
+          <p class="desc">NNMT inhibitor at the frontier of metabolic and longevity research.</p>
+          <div class="prod-foot"><div class="prod-price">$88<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="metabolic" style="--i:4">
+        <div class="prod-visual"><span class="prod-cat">Metabolic</span>
+          <img src="images/products/mots-c-10mg.webp" alt="DefiningLife MOTS-c 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>MOTS-c <span class="mg">10mg</span></h3>
+          <p class="desc">Mitochondrial-derived peptide studied in metabolic and longevity research.</p>
+          <div class="prod-foot"><div class="prod-price">$78<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="longevity" style="--i:5">
+        <div class="prod-visual"><span class="prod-cat">Longevity</span>
+          <img src="images/products/epitalon-20mg.webp" alt="DefiningLife Epitalon 20mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Epitalon <span class="mg">20mg</span></h3>
+          <p class="desc">Synthetic tetrapeptide studied in telomerase and cellular-aging research.</p>
+          <div class="prod-foot"><div class="prod-price">$96<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="longevity" style="--i:0">
+        <div class="prod-visual"><span class="prod-cat">Longevity</span>
+          <img src="images/products/nad-plus-1000mg.webp" alt="DefiningLife NAD+ 1000mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>NAD+ <span class="mg">1000mg</span></h3>
+          <p class="desc">Coenzyme central to cellular energy metabolism and longevity-pathway research.</p>
+          <div class="prod-foot"><div class="prod-price">$98<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="longevity" style="--i:1">
+        <div class="prod-visual"><span class="prod-cat">Longevity</span>
+          <img src="images/products/glutathione-1500mg.webp" alt="DefiningLife Glutathione 1500mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Glutathione <span class="mg">1500mg</span></h3>
+          <p class="desc">Master antioxidant studied for its role in oxidative-stress research.</p>
+          <div class="prod-foot"><div class="prod-price">$72<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="longevity" style="--i:2">
+        <div class="prod-visual"><span class="prod-cat">Longevity</span>
+          <img src="images/products/ss-31-10mg.webp" alt="DefiningLife SS-31 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>SS-31 <span class="mg">10mg</span></h3>
+          <p class="desc">Mitochondria-targeted peptide studied in cellular-energetics research.</p>
+          <div class="prod-foot"><div class="prod-price">$102<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="cognitive" style="--i:3">
+        <div class="prod-visual"><span class="prod-cat">Cognitive</span>
+          <img src="images/products/semax-11mg.webp" alt="DefiningLife Semax 11mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Semax <span class="mg">11mg</span></h3>
+          <p class="desc">Nootropic peptide studied for neurotrophic and cognitive-pathway research.</p>
+          <div class="prod-foot"><div class="prod-price">$76<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="cognitive" style="--i:4">
+        <div class="prod-visual"><span class="prod-cat">Cognitive</span>
+          <img src="images/products/selank-11mg.webp" alt="DefiningLife Selank 11mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Selank <span class="mg">11mg</span></h3>
+          <p class="desc">Anxiolytic peptide studied for its effect on neuroimmune signalling.</p>
+          <div class="prod-foot"><div class="prod-price">$74<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="cognitive" style="--i:5">
+        <div class="prod-visual"><span class="prod-cat">Cognitive</span>
+          <img src="images/products/dsip-10mg.webp" alt="DefiningLife DSIP 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>DSIP <span class="mg">10mg</span></h3>
+          <p class="desc">Delta sleep-inducing peptide studied in sleep-regulation research.</p>
+          <div class="prod-foot"><div class="prod-price">$56<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="immune" style="--i:0">
+        <div class="prod-visual"><span class="prod-cat">Immune</span>
+          <img src="images/products/thymosin-alpha-1-10mg.webp" alt="DefiningLife Thymosin Alpha-1 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Thymosin Alpha-1 <span class="mg">10mg</span></h3>
+          <p class="desc">Thymic peptide with decades of immune-signalling research behind it.</p>
+          <div class="prod-foot"><div class="prod-price">$70<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="immune" style="--i:1">
+        <div class="prod-visual"><span class="prod-cat">Hormonal</span>
+          <img src="images/products/kisspeptin-5mg.webp" alt="DefiningLife Kisspeptin 5mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Kisspeptin <span class="mg">5mg</span></h3>
+          <p class="desc">Neuropeptide studied for its role in reproductive-hormone signalling.</p>
+          <div class="prod-foot"><div class="prod-price">$52<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="immune" style="--i:2">
+        <div class="prod-visual"><span class="prod-cat">Immune</span>
+          <img src="images/products/kpv-5mg.webp" alt="DefiningLife KPV 5mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>KPV <span class="mg">5mg</span></h3>
+          <p class="desc">Tripeptide fragment of alpha-MSH studied for anti-inflammatory research.</p>
+          <div class="prod-foot"><div class="prod-price">$54<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="immune" style="--i:3">
+        <div class="prod-visual"><span class="prod-cat">Hormonal</span>
+          <img src="images/products/pt-141-10mg.webp" alt="DefiningLife PT-141 10mg" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>PT-141 <span class="mg">10mg</span></h3>
+          <p class="desc">Melanocortin receptor agonist studied in sexual-response research.</p>
+          <div class="prod-foot"><div class="prod-price">$58<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+      <div class="prod-card reveal" data-cat="accessory" style="--i:4">
+        <div class="prod-visual"><span class="prod-cat">Accessory</span>
+          <img src="images/products/bac-water-10ml.webp" alt="DefiningLife Bacteriostatic Water 10ml" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Bacteriostatic Water <span class="mg">10ml</span></h3>
+          <p class="desc">Sterile bacteriostatic water for reconstituting lyophilized research peptides.</p>
+          <div class="prod-foot"><div class="prod-price">$18<span> /vial</span></div><a href="#" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" id="prodEmpty">
+      <p style="font-family:'Fraunces';font-size:20px;color:var(--ink);margin-bottom:8px;">No compounds match that search.</p>
+      <p>Try a different name, or clear the filter to see the full catalog.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div><h3>Can't find what you need?</h3><p>We add to the catalog every week — tell us what you're researching.</p></div>
+      <div><a href="contact.html" class="btn" style="background:#fff;color:var(--brand);">Contact Us</a></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife" style="height:26px;"></a>
+        <p>Pharmaceutical-grade research peptides, independently verified and dispatched from a single certified source. Research use only.</p>
+      </div>
+      <div><h5>Shop</h5><ul><li><a href="shop.html">All Peptides</a></li><li><a href="shop.html">TB-500</a></li><li><a href="shop.html">BPC-157</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="about.html">About</a></li><li><a href="testing.html">Lab Results</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+      <div><h5>Contact</h5><ul><li><a href="mailto:support@defininglife.com">support@defininglife.com</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 DefiningLife. All rights reserved.</span>
+      <span class="disc">All products supplied strictly for laboratory research purposes only. Not for human or veterinary consumption. Not evaluated by the FDA.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var gate=document.getElementById('gate'); var ok=false;
+  try{ ok = localStorage.getItem('dl_gate_ok')==='1'; }catch(e){}
+  if(ok) gate.classList.add('hide');
+  document.getElementById('gateEnter').addEventListener('click', function(){
+    gate.classList.add('hide'); try{ localStorage.setItem('dl_gate_ok','1'); }catch(e){}
+  });
+
+  var h=document.getElementById('siteHeader');
+  window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY>24); }, {passive:true});
+
+  var bar=document.getElementById('scrollbar');
+  window.addEventListener('scroll', function(){
+    var d=document.documentElement; var pct=d.scrollTop/(d.scrollHeight-d.clientHeight)*100;
+    bar.style.width=(isFinite(pct)?pct:0)+'%';
+  }, {passive:true});
+
+  var burger=document.getElementById('burger'); var nav=document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = nav.style.display==='flex'; nav.style.display = open?'':'flex';
+    if(!open){ nav.style.position='fixed'; nav.style.top='66px'; nav.style.left='16px'; nav.style.right='16px';
+      nav.style.background='#fff'; nav.style.flexDirection='column'; nav.style.gap='16px'; nav.style.padding='22px';
+      nav.style.borderRadius='14px'; nav.style.boxShadow='0 20px 50px rgba(0,0,0,.15)'; }
+  });
+  function check(){
+    if(window.innerWidth<=860){ burger.style.display='flex'; nav.style.display='none'; }
+    else{ burger.style.display='none'; nav.style.display='flex'; nav.style.position='static'; nav.style.boxShadow='none'; nav.style.padding='0'; }
+  }
+  check(); window.addEventListener('resize', check);
+
+  var els=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  els.forEach(function(el){ io.observe(el); });
+
+  var tabs = document.querySelectorAll('.prod-tab');
+  var cards = document.querySelectorAll('#prodGrid .prod-card');
+  var search = document.getElementById('prodSearch');
+  var empty = document.getElementById('prodEmpty');
+  var activeCat = 'all';
+  function apply(){
+    var q = (search.value || '').trim().toLowerCase();
+    var visible = 0;
+    cards.forEach(function(c){
+      var matchesCat = activeCat === 'all' || c.dataset.cat === activeCat;
+      var matchesQ = !q || c.textContent.toLowerCase().indexOf(q) !== -1;
+      var show = matchesCat && matchesQ;
+      c.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+    empty.classList.toggle('show', visible === 0);
+  }
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      activeCat = tab.dataset.f;
+      apply();
+    });
+  });
+  search.addEventListener('input', apply);
+});
+</script>
+</body>
+</html>

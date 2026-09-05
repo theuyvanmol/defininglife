@@ -45,15 +45,19 @@ a{color:inherit;text-decoration:none;}
 .reveal.in{opacity:1;transform:translateY(0);}
 .stagger>*{transition-delay:calc(var(--i,0)*70ms);}
 
-/* ===== glass primitives ===== */
-.glass{background:var(--glass);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid var(--glass-border);box-shadow:var(--shadow-glass);}
-.glass-strong{background:var(--glass-strong);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--glass-border);}
+/* ===== liquid glass primitives (Apple-style) ===== */
+.glass{position:relative;background:var(--glass);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 1px rgba(255,255,255,.9),inset 0 -8px 20px rgba(255,255,255,.15),0 20px 50px -20px rgba(21,94,127,.35);}
+.glass-strong{position:relative;background:var(--glass-strong);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,.9);box-shadow:inset 0 1px 1px rgba(255,255,255,1),inset 0 -6px 16px rgba(255,255,255,.2),0 16px 40px -18px rgba(21,94,127,.3);}
+.lg-sheen{position:relative;isolation:isolate;}
+.lg-sheen::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 42%);pointer-events:none;z-index:1;mix-blend-mode:overlay;}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:999px;font-weight:600;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s;}
-.btn-primary{background:var(--ink);color:#fff;box-shadow:0 14px 30px -10px rgba(11,32,39,.5);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:999px;font-weight:600;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s;position:relative;isolation:isolate;overflow:hidden;}
+.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 55%);pointer-events:none;mix-blend-mode:overlay;}
+.btn-primary{background:var(--ink);color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 1px rgba(255,255,255,.15),0 14px 30px -10px rgba(11,32,39,.5);}
 .btn-primary:hover{background:var(--brand);transform:translateY(-2px);}
-.btn-glass{background:var(--glass-strong);backdrop-filter:blur(16px);color:var(--ink);border:1px solid var(--glass-border);}
-.btn-glass:hover{background:#fff;transform:translateY(-2px);}
+.btn-glass{background:rgba(255,255,255,.16);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);color:#fff;border:1px solid rgba(255,255,255,.4);box-shadow:inset 0 1px 1px rgba(255,255,255,.6),0 8px 24px -10px rgba(0,0,0,.3);}
+.btn-glass:hover{background:rgba(255,255,255,.26);transform:translateY(-2px);}
+
 
 header{position:fixed;top:0;left:0;right:0;z-index:60;padding:18px 0;}
 header .wrap>.navbar{display:flex;align-items:center;justify-content:space-between;padding:12px 22px;border-radius:999px;transition:background .3s,box-shadow .3s;}
@@ -69,12 +73,11 @@ nav.links a:hover,nav.links a.active{color:var(--ink);}
 .hero{position:relative;padding:0 0 60px;}
 .hero-shell{
   border-radius:0;padding:0;position:relative;overflow:hidden;
-  background:radial-gradient(ellipse 900px 600px at 15% 20%, rgba(63,134,168,.35), transparent 60%),
-             radial-gradient(ellipse 700px 500px at 85% 80%, rgba(95,224,196,.18), transparent 60%),
-             linear-gradient(160deg,#0A1B20,#0D2830 55%,#0A2024);
+  background:linear-gradient(160deg,#0A1B20,#0D2830 55%,#0A2024);
   min-height:640px;border-bottom:1px solid rgba(255,255,255,.08);
   padding-top:104px;
 }
+#heroGradient{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 .hero-top{display:flex;justify-content:space-between;align-items:flex-start;padding:36px 0 0;position:relative;z-index:3;}
 .hero-top .htag{font-size:12px;font-weight:600;color:#8FD7C4;letter-spacing:.02em;max-width:280px;text-align:right;line-height:1.6;}
 .hero-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
@@ -95,18 +98,19 @@ h1.hero-title{font-size:clamp(32px,4.6vw,54px);line-height:1.08;letter-spacing:-
 .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
 .hero-shell .eyebrow{color:#9DF0DD;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);}
 .hero-shell .eyebrow::before{background:#5FE0C4;box-shadow:0 0 8px 2px rgba(95,224,196,.6);}
-.hero-shell .hero-cta .btn-primary{background:#fff;color:#0A1B20;}
+.hero-shell .hero-cta .btn-primary{background:rgba(255,255,255,.95);color:#0A1B20;box-shadow:inset 0 1px 1px #fff,0 14px 30px -10px rgba(0,0,0,.4);}
 .hero-shell .hero-cta .btn-primary:hover{background:#5FE0C4;color:#0A1B20;}
 .hero-shell .hero-cta .btn-glass{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff;}
 .hero-shell .hero-cta .btn-glass:hover{background:rgba(255,255,255,.16);}
-.hero-badge-pill{display:inline-flex;align-items:center;gap:8px;margin-top:34px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:10px 18px;font-size:12.5px;font-weight:600;color:#D7EEE8;}
+.hero-badge-pill{display:inline-flex;align-items:center;gap:8px;margin-top:34px;background:rgba(255,255,255,.1);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.32);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 10px 24px -12px rgba(0,0,0,.4);border-radius:999px;padding:10px 18px;font-size:12.5px;font-weight:600;color:#D7EEE8;position:relative;isolation:isolate;overflow:hidden;}
+.hero-badge-pill::before,.hero-float-card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 50%);pointer-events:none;mix-blend-mode:overlay;}
 .hero-badge-pill b{color:#9DF0DD;}
 
 .pen-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:340px;}
 .pen-glass-plate{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(95,224,196,.18),transparent 70%);filter:blur(6px);}
 .pen-stage img{width:100%;max-width:190px;position:relative;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5));transform:rotate(-16deg);animation:floatY 6s ease-in-out infinite;}
 @keyframes floatY{0%,100%{transform:rotate(-16deg) translateY(0);}50%{transform:rotate(-13deg) translateY(-14px);}}
-.hero-float-card{position:absolute;bottom:8%;right:2%;background:rgba(15,40,45,.72);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;max-width:190px;z-index:4;}
+.hero-float-card{position:absolute;bottom:8%;right:2%;background:rgba(255,255,255,.12);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 16px 34px -14px rgba(0,0,0,.45);border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:10px;max-width:190px;z-index:4;}
 .hero-float-card .fc-ic{width:26px;height:26px;border-radius:8px;background:rgba(95,224,196,.15);display:flex;align-items:center;justify-content:center;flex:none;}
 .hero-float-card b{display:block;font-size:12px;color:#fff;font-weight:600;}
 .hero-float-card span{font-size:10.5px;color:#9BBDB6;}
@@ -139,6 +143,27 @@ section{padding:80px 0;}
 
 .spot{border-radius:28px;padding:48px;}
 @media (max-width:640px){.spot{padding:28px 22px;}}
+
+.bento-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;}
+@media (max-width:900px){.bento-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.bento-grid{grid-template-columns:1fr;}}
+.bento-span-3{grid-column:span 3;}
+.bento-span-2{grid-column:span 2;}
+@media (max-width:900px){.bento-span-3,.bento-span-2{grid-column:span 2;}}
+@media (max-width:560px){.bento-span-3,.bento-span-2{grid-column:span 1;}}
+.bento-card{position:relative;display:block;border-radius:22px;overflow:hidden;background:#0B2027;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .4s var(--ease);}
+.bento-card:hover{transform:translateY(-5px);}
+.bento-graphic{position:absolute;inset:0;overflow:hidden;}
+.bento-graphic img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .6s var(--ease);filter:saturate(1.05) brightness(.85);}
+.bento-card:hover .bento-graphic img{transform:scale(1.06);}
+.bento-fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,20,24,.92) 20%,rgba(8,20,24,.15) 65%,transparent 100%);}
+.bento-body{position:relative;z-index:2;padding:26px;color:#fff;}
+.bento-eyebrow{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9DF0DD;}
+.bento-body h3{font-family:'Fraunces';font-size:19px;font-weight:500;color:#fff;margin-top:8px;}
+.bento-body p{font-size:13px;color:rgba(255,255,255,.72);margin-top:8px;max-width:340px;}
+.bento-solid{background:linear-gradient(155deg,#12262b,#0A1B20);min-height:230px;padding:26px;justify-content:flex-start;}
+.bento-solid .bento-icon{width:44px;height:44px;border-radius:12px;background:rgba(157,240,221,.1);border:1px solid rgba(157,240,221,.2);display:flex;align-items:center;justify-content:center;margin-bottom:auto;}
+.bento-solid .bento-body{padding:0;margin-top:18px;}
 .spot-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center;}
 @media (max-width:900px){.spot-grid{grid-template-columns:1fr;gap:30px;}}
 .spot-visual{display:flex;align-items:center;justify-content:center;padding:10px;}
@@ -261,6 +286,7 @@ footer a:hover{color:var(--brand);}
 
 <section class="hero">
   <div class="hero-shell">
+    <canvas id="heroGradient"></canvas>
     <div class="hero-shapes">
       <div class="hero-tri tri1"></div>
       <div class="hero-tri tri2"></div>
@@ -361,6 +387,64 @@ footer a:hover{color:var(--brand);}
           <div class="hero-cta" style="margin-top:24px;"><a href="/shop" class="btn btn-primary">View BPC-157</a></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Why DefiningLife</div>
+      <h2>Everything researchers actually need.</h2>
+      <p>From verification to dosing, the whole workflow lives in one place.</p>
+    </div>
+    <div class="bento-grid stagger">
+      <div class="bento-card bento-span-3 reveal" style="--i:0">
+        <div class="bento-graphic">
+          <img src="images/products/bpc-157-10mg.webp" alt="BPC-157 vial">
+          <div class="bento-fade"></div>
+        </div>
+        <div class="bento-body glass-strong">
+          <span class="bento-eyebrow">Testing</span>
+          <h3>Every batch, documented.</h3>
+          <p>HPLC/MS tested at the source, independently re-verified, and published for anyone to check before they order.</p>
+        </div>
+      </div>
+      <a href="/shop" class="bento-card bento-span-3 reveal" style="--i:1">
+        <div class="bento-graphic">
+          <img src="images/products/tb-500-5mg.webp" alt="TB-500 vial">
+          <div class="bento-fade"></div>
+        </div>
+        <div class="bento-body glass-strong">
+          <span class="bento-eyebrow">Catalog</span>
+          <h3>41 vials &amp; pens, one source.</h3>
+          <p>Organized across recovery, metabolic, longevity, cognitive, immune, and signature blends.</p>
+        </div>
+      </a>
+      <div class="bento-card bento-span-2 bento-solid reveal" style="--i:2">
+        <div class="bento-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 8l9-5 9 5-9 5-9-5z" stroke="#9DF0DD" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 8v8l9 5 9-5V8" stroke="#9DF0DD" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="bento-body">
+          <span class="bento-eyebrow">Dispatch</span>
+          <h3>Same-day, discreet.</h3>
+          <p>Sealed, unmarked packaging with tracking the moment it ships.</p>
+        </div>
+      </div>
+      <a href="/calculator" class="bento-card bento-span-2 bento-solid reveal" style="--i:3">
+        <div class="bento-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#9DF0DD" stroke-width="1.6"/><path d="M8 8h8M8 12h5M8 16h3" stroke="#9DF0DD" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="bento-body">
+          <span class="bento-eyebrow">Tools</span>
+          <h3>Dose it right.</h3>
+          <p>A live reconstitution calculator, free to use — no signup required.</p>
+        </div>
+      </a>
+      <a href="/contact" class="bento-card bento-span-2 bento-solid reveal" style="--i:4">
+        <div class="bento-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="#9DF0DD" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <div class="bento-body">
+          <span class="bento-eyebrow">Support</span>
+          <h3>Real humans, real answers.</h3>
+          <p>Message us on LINE or the contact form — no bots, no queues.</p>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -522,6 +606,96 @@ document.addEventListener('DOMContentLoaded', function(){
   }, {threshold:.1});
   els.forEach(function(el){ io.observe(el); });
 });
+
+/* ================= animated WebGL gradient (hero background) ================= */
+(function(){
+  var canvas = document.getElementById('heroGradient');
+  var container = canvas && canvas.closest('.hero-shell');
+  if (!canvas || !container) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var gl = canvas.getContext('webgl');
+  if (!gl) return; // fails silently — the CSS gradient background still shows
+
+  var vertexSrc = "attribute vec2 position;varying vec2 vUv;void main(){vUv=position*0.5+0.5;gl_Position=vec4(position,0.0,1.0);}";
+  var fragmentSrc = "precision highp float;varying vec2 vUv;uniform vec2 u_resolution;uniform float u_time;uniform float u_grain;uniform vec3 u_colors[4];uniform vec3 u_bg;"
+    + "vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}"
+    + "float snoise(vec2 v){const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);"
+    + "vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);"
+    + "vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.0);"
+    + "vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));"
+    + "vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);m=m*m;m=m*m;"
+    + "vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-0.5;vec3 ox=floor(x+0.5);vec3 a0=x-ox;"
+    + "m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.0*dot(m,g);}"
+    + "void main(){vec2 uv=vUv;float ratio=u_resolution.x/u_resolution.y;vec2 p=uv-0.5;p.x*=ratio;float t=u_time*0.1;"
+    + "float n1=snoise(p*0.4+vec2(t*0.2,-t*0.3));float n2=snoise(p*0.55+vec2(-t*0.15,t*0.25)+n1*0.25);float n3=snoise(p*0.75+vec2(t*0.1,-t*0.2)+n2*0.2);"
+    + "vec3 col=u_bg;float dist=length(p)*1.5;float vig=1.0-smoothstep(0.3,1.2,dist);"
+    + "col=mix(col,u_colors[0],smoothstep(-0.2,0.5,n1)*0.85);col=mix(col,u_colors[1],smoothstep(-0.1,0.6,n2)*0.7);"
+    + "col=mix(col,u_colors[2],smoothstep(-0.3,0.4,n3)*0.6);col=mix(col,u_colors[3],smoothstep(0.0,0.7,n1*n2)*0.5);"
+    + "float glow=smoothstep(0.8,0.0,dist)*0.3;col+=u_colors[1]*glow;col=mix(col*0.2,col,vig);"
+    + "float grain=fract(sin(dot(uv,vec2(12.9898,78.233)))*43758.5453+u_time);col+=(grain-0.5)*u_grain*0.1;"
+    + "gl_FragColor=vec4(col,1.0);}";
+
+  function createShader(type, src){
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  var program = gl.createProgram();
+  gl.attachShader(program, createShader(gl.VERTEX_SHADER, vertexSrc));
+  gl.attachShader(program, createShader(gl.FRAGMENT_SHADER, fragmentSrc));
+  gl.linkProgram(program);
+  gl.useProgram(program);
+
+  var buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  var posLoc = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  var locs = {
+    res: gl.getUniformLocation(program, 'u_resolution'),
+    time: gl.getUniformLocation(program, 'u_time'),
+    grain: gl.getUniformLocation(program, 'u_grain'),
+    colors: gl.getUniformLocation(program, 'u_colors'),
+    bg: gl.getUniformLocation(program, 'u_bg')
+  };
+
+  // brand palette — mint, mid-blue, deep teal, near-black base
+  var BG = hexToRgb('#0A1B20');
+  var COLORS = ['#5FE0C4', '#3F86A8', '#155E7F', '#0A2530'].map(hexToRgb);
+  var SPEED = 1.1, GRAIN = 0.12;
+
+  function hexToRgb(hex){
+    var h = hex.replace('#','');
+    return [parseInt(h.slice(0,2),16)/255, parseInt(h.slice(2,4),16)/255, parseInt(h.slice(4,6),16)/255];
+  }
+
+  function resize(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = container.clientWidth * dpr;
+    canvas.height = container.clientHeight * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  var ro = new ResizeObserver(resize);
+  ro.observe(container);
+  resize();
+
+  var raf;
+  function render(t){
+    gl.uniform2f(locs.res, canvas.width, canvas.height);
+    gl.uniform1f(locs.time, t * 0.001 * SPEED);
+    gl.uniform1f(locs.grain, GRAIN);
+    gl.uniform3f(locs.bg, BG[0], BG[1], BG[2]);
+    var flat = new Float32Array(COLORS.flat());
+    gl.uniform3fv(locs.colors, flat);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    raf = requestAnimationFrame(render);
+  }
+  raf = requestAnimationFrame(render);
+})();
 </script>
 </body>
 </html>

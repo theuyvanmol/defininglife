@@ -179,10 +179,12 @@ section{padding:80px 0;}
 .arrivals-track{display:flex;gap:18px;width:max-content;animation:arrivalsScroll 40s linear infinite;}
 .arrivals-wrap:hover .arrivals-track{animation-play-state:paused;}
 @keyframes arrivalsScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-.arrival-card{flex:0 0 260px;border-radius:18px;padding:20px;transition:transform .35s var(--ease);}
-.arrival-card:hover{transform:translateY(-5px);}
-.arrival-visual{height:120px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
-.arrival-visual img{height:100%;object-fit:contain;}
+.arrival-card{flex:0 0 340px;border-radius:20px;padding:24px;transition:transform .4s var(--ease);overflow:hidden;}
+.arrival-card:hover{transform:translateY(-6px);}
+.arrival-visual{height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden;position:relative;}
+@media (max-width:640px){.arrival-visual{height:220px;}.arrival-card{flex:0 0 260px;}}
+.arrival-visual img{height:100%;object-fit:contain;object-position:center;transform:scale(1.32);transition:transform .55s var(--ease);}
+.arrival-card:hover .arrival-visual img{transform:scale(1.48);}
 .arrival-card h4{font-family:'Fraunces';font-size:16px;font-weight:500;}
 .arrival-card p{font-size:12px;margin-top:4px;}
 .arrival-price{font-family:'Fraunces';font-size:14px;margin-top:10px;padding-top:10px;border-top:1px solid var(--glass-border);}
@@ -297,7 +299,7 @@ footer a:hover{color:var(--brand);}
     </div>
     <div class="hero-top wrap">
       <img src="images/logo/icon.png" alt="" style="height:22px;opacity:.9;filter:brightness(0) invert(1);">
-      <div class="htag">Explore the full catalog, verify any batch, and see why researchers choose a single certified source.</div>
+      <div class="htag">Explore the full catalogue, verify any batch, and see why researchers choose a single certified source.</div>
     </div>
     <div class="hero-grid wrap">
       <div>
@@ -336,7 +338,7 @@ footer a:hover{color:var(--brand);}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Shop by Application</div>
-      <h2>Organized by research area.</h2>
+      <h2>Organised by research area.</h2>
       <p>Every compound is grouped by the pathway it's studied for — go straight to the research you're running.</p>
     </div>
     <div class="cat-grid stagger">
@@ -354,8 +356,8 @@ footer a:hover{color:var(--brand);}
       </a>
       <a href="/shop" class="cat-card glass reveal" style="--i:2">
         <div class="cat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#155E7F" stroke-width="1.6"/><path d="M12 8v4l3 2" stroke="#155E7F" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <h4>Anti-Aging &amp; Longevity</h4>
-        <p>NAD+ and mitochondrial peptides for aging research.</p>
+        <h4>Anti-Ageing &amp; Longevity</h4>
+        <p>NAD+ and mitochondrial peptides for ageing research.</p>
         <div class="cat-count">4 compounds</div>
       </a>
       <a href="/shop" class="cat-card glass reveal" style="--i:3">
@@ -416,9 +418,9 @@ footer a:hover{color:var(--brand);}
           <div class="bento-fade"></div>
         </div>
         <div class="bento-body glass-strong">
-          <span class="bento-eyebrow">Catalog</span>
+          <span class="bento-eyebrow">Catalogue</span>
           <h3>41 vials &amp; pens, one source.</h3>
-          <p>Organized across recovery, metabolic, longevity, cognitive, immune, and signature blends.</p>
+          <p>Organised across recovery, metabolic, longevity, cognitive, immune, and signature blends.</p>
         </div>
       </a>
       <div class="bento-card bento-span-2 bento-solid reveal" style="--i:2">
@@ -517,7 +519,7 @@ footer a:hover{color:var(--brand);}
       <h2>From bench to doorstep.</h2>
     </div>
     <div class="steps stagger">
-      <div class="step glass reveal" style="--i:0"><div class="num">01</div><h4>Browse the catalog</h4><p>Filter by research area, check pricing, pick a strength.</p></div>
+      <div class="step glass reveal" style="--i:0"><div class="num">01</div><h4>Browse the catalogue</h4><p>Filter by research area, check pricing, pick a strength.</p></div>
       <div class="step glass reveal" style="--i:1"><div class="num">02</div><h4>Message us</h4><p>Fill out the contact form or message us on LINE to confirm your order.</p></div>
       <div class="step glass reveal" style="--i:2"><div class="num">03</div><h4>Fast, discreet dispatch</h4><p>Sealed, unmarked packaging with a tracking number the moment it ships.</p></div>
     </div>

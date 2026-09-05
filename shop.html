@@ -95,8 +95,8 @@ section{padding:0 0 100px;}
 .prod-visual{height:320px;background:linear-gradient(160deg,var(--tint),var(--bg-2));display:flex;align-items:center;justify-content:center;position:relative;padding:20px;overflow:hidden;}
 @media (max-width:640px){.prod-visual{height:240px;}}
 .prod-visual-pen{background:linear-gradient(160deg,#E4EEF0,var(--bg-2));}
-.prod-visual img,.prod-visual svg{height:100%;width:auto;max-width:100%;object-fit:contain;object-position:center;transition:transform .55s var(--ease);position:relative;z-index:1;transform:scale(1.32);}
-.prod-card:hover .prod-visual img,.prod-card:hover .prod-visual svg{transform:scale(1.48);}
+.prod-visual img,.prod-visual svg{height:92%;width:auto;max-width:92%;object-fit:contain;object-position:center;transition:transform .45s var(--ease);position:relative;z-index:1;transform:scale(1);}
+.prod-card:hover .prod-visual img,.prod-card:hover .prod-visual svg{transform:scale(1.12);}
 .prod-visual::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .8s var(--ease);z-index:2;pointer-events:none;}
 .prod-card:hover .prod-visual::after{left:130%;}
 .prod-cat{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:#fff;padding:5px 9px;border-radius:20px;color:var(--brand);box-shadow:0 4px 12px rgba(11,32,39,.08);z-index:3;}

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Shop — DefiningLife Research Peptides</title>
-<meta name="description" content="Browse the full DefiningLife catalog of research peptide vials and pre-dosed pens — filter by research area, search by name, every batch tested.">
+<meta name="description" content="Browse the full DefiningLife catalogue of research peptide vials and pre-dosed pens — filter by research area, search by name, every batch tested.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -64,10 +64,11 @@ nav.links a:hover::after,nav.links a.active::after{width:100%;}
 .page-hero h1{font-size:clamp(32px,4.4vw,52px);line-height:1.08;max-width:700px;}
 .page-hero .sub{margin-top:18px;max-width:560px;font-size:16px;}
 
-.format-toggle{display:inline-flex;background:var(--tint);border-radius:999px;padding:5px;gap:4px;margin-top:32px;}
+.format-toggle{display:inline-flex;background:var(--tint);border-radius:999px;padding:5px;gap:4px;margin-top:32px;flex-wrap:wrap;max-width:100%;}
 .format-btn{padding:11px 24px;border-radius:999px;font-size:13.5px;font-weight:700;color:var(--ink-soft);cursor:pointer;transition:.3s var(--ease);border:none;background:none;position:relative;}
 .format-btn.active{background:var(--ink);color:#fff;box-shadow:0 8px 20px rgba(11,32,39,.2);}
 .format-btn .count{font-size:10.5px;opacity:.65;margin-left:4px;}
+@media (max-width:420px){.format-toggle{display:flex;width:100%;}.format-btn{flex:1;padding:11px 12px;font-size:12.5px;text-align:center;}}
 
 section{padding:0 0 100px;}
 @media (max-width:768px){section{padding-bottom:70px;}}
@@ -90,10 +91,11 @@ section{padding:0 0 100px;}
 @media (max-width:520px){.prod-grid{grid-template-columns:1fr;}}
 .prod-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s;}
 .prod-card:hover{transform:translateY(-7px);box-shadow:var(--shadow);border-color:var(--brand-2);}
-.prod-visual{height:200px;background:linear-gradient(160deg,var(--tint),var(--bg-2));display:flex;align-items:center;justify-content:center;position:relative;padding:14px;overflow:hidden;}
+.prod-visual{height:320px;background:linear-gradient(160deg,var(--tint),var(--bg-2));display:flex;align-items:center;justify-content:center;position:relative;padding:20px;overflow:hidden;}
+@media (max-width:640px){.prod-visual{height:240px;}}
 .prod-visual-pen{background:linear-gradient(160deg,#E4EEF0,var(--bg-2));}
-.prod-visual img,.prod-visual svg{height:100%;width:auto;max-width:100%;object-fit:contain;transition:transform .55s var(--ease);position:relative;z-index:1;}
-.prod-card:hover .prod-visual img,.prod-card:hover .prod-visual svg{transform:scale(1.07);}
+.prod-visual img,.prod-visual svg{height:100%;width:auto;max-width:100%;object-fit:contain;object-position:center;transition:transform .55s var(--ease);position:relative;z-index:1;transform:scale(1.32);}
+.prod-card:hover .prod-visual img,.prod-card:hover .prod-visual svg{transform:scale(1.48);}
 .prod-visual::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .8s var(--ease);z-index:2;pointer-events:none;}
 .prod-card:hover .prod-visual::after{left:130%;}
 .prod-cat{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:#fff;padding:5px 9px;border-radius:20px;color:var(--brand);box-shadow:0 4px 12px rgba(11,32,39,.08);z-index:3;}
@@ -184,7 +186,7 @@ footer a:hover{color:var(--brand);}
 <section class="page-hero">
   <div class="wrap">
     <div class="crumb"><a href="/">Home</a> / Shop</div>
-    <div class="eyebrow">The Full Catalog</div>
+    <div class="eyebrow">The Full Catalogue</div>
     <h1>Vials and pre-dosed pens, one certified source.</h1>
     <p class="sub">Every vial is HPLC/MS tested and shipped sealed. Prices shown in GBP. Fill out the contact form or message us on LINE to order — we don't process payment online.</p>
     <div class="format-toggle">
@@ -377,7 +379,7 @@ footer a:hover{color:var(--brand);}
         </div>
         <div class="prod-body">
           <h3>Epitalon <span class="mg js-mg">10mg</span></h3>
-          <p class="desc">Synthetic tetrapeptide studied in telomerase and cellular-aging research.</p>
+          <p class="desc">Synthetic tetrapeptide studied in telomerase and cellular-ageing research.</p>
           <div class="variant-pills js-pills"></div>
           <div class="prod-foot"><div class="prod-price">£<span class="js-price">25</span><span> /vial</span></div><a href="/contact" class="prod-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a></div>
         </div>
@@ -556,7 +558,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="empty-state" id="vialEmpty">
         <p style="font-family:'Fraunces';font-size:20px;color:var(--ink);margin-bottom:8px;">No compounds match that search.</p>
-        <p>Try a different name, or clear the filter to see the full catalog.</p>
+        <p>Try a different name, or clear the filter to see the full catalogue.</p>
       </div>
     </div>
 
@@ -921,7 +923,7 @@ footer a:hover{color:var(--brand);}
 <section>
   <div class="wrap">
     <div class="cta-band reveal">
-      <div><h3>Can't find what you need?</h3><p>We add to the catalog every week — tell us what you're researching.</p></div>
+      <div><h3>Can't find what you need?</h3><p>We add to the catalogue every week — tell us what you're researching.</p></div>
       <div><a href="/contact" class="btn" style="background:#fff;color:var(--brand);">Contact Us</a></div>
     </div>
   </div>

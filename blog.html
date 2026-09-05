@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blog — DefiningLife Research Journal</title>
+<meta name="description" content="Research notes, protocols, and reading on peptide research from the DefiningLife team.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B2027; --ink-soft:#547079; --ink-dim:#8DA3A9;
+  --bg:#FBFDFC; --bg-2:#F2F8F6; --surface:#FFFFFF;
+  --brand:#155E7F; --brand-2:#3F86A8; --tint:#EAF3F1;
+  --line:rgba(11,32,39,0.10); --line-soft:rgba(11,32,39,0.06);
+  --shadow:0 24px 60px -24px rgba(11,32,39,0.18);
+  --ease:cubic-bezier(.16,.8,.24,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.015em;margin:0;color:var(--ink);}
+p{line-height:1.7;color:var(--ink-soft);margin:0;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+@media (max-width:640px){.wrap{padding:0 20px;}}
+::selection{background:rgba(21,94,127,.15);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.stagger>*{transition-delay:calc(var(--i,0)*70ms);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:8px;font-weight:600;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:var(--brand);box-shadow:var(--shadow);}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand);}
+
+header{position:fixed;top:0;left:0;right:0;z-index:60;padding:22px 0;transition:padding .35s var(--ease),background .35s,box-shadow .35s;}
+header.scrolled{padding:14px 0;background:rgba(251,253,252,0.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);}
+header .wrap{display:flex;align-items:center;justify-content:space-between;}
+.logo img{height:28px;width:auto;display:block;}
+nav.links{display:flex;align-items:center;gap:34px;}
+nav.links a{font-size:13.5px;font-weight:600;color:var(--ink-soft);position:relative;transition:color .25s;}
+nav.links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--brand);transition:width .3s var(--ease);}
+nav.links a:hover,nav.links a.active{color:var(--ink);}
+nav.links a:hover::after,nav.links a.active::after{width:100%;}
+.head-actions{display:flex;align-items:center;gap:14px;}
+.burger{display:none;width:38px;height:38px;border-radius:8px;border:1px solid var(--line);align-items:center;justify-content:center;background:none;cursor:pointer;}
+.burger span,.burger span::before,.burger span::after{content:"";display:block;width:14px;height:1.4px;background:var(--ink);position:relative;}
+.burger span::before{position:absolute;top:-5px;}.burger span::after{position:absolute;top:5px;}
+
+.page-hero{position:relative;padding:158px 0 60px;overflow:hidden;}
+.page-hero::before{content:"";position:absolute;top:-140px;right:-160px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(21,94,127,0.07),transparent 68%);}
+.page-hero .wrap{position:relative;}
+.crumb{font-size:12px;color:var(--ink-dim);margin-bottom:16px;}
+.crumb a{color:var(--ink-soft);}
+.crumb a:hover{color:var(--brand);}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--brand);margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);}
+.page-hero h1{font-size:clamp(30px,4.2vw,48px);line-height:1.08;max-width:680px;}
+.page-hero .sub{margin-top:16px;max-width:600px;font-size:15.5px;}
+
+section{padding:0 0 100px;}
+@media (max-width:768px){section{padding-bottom:70px;}}
+
+.blog-featured{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:50px;background:var(--surface);transition:box-shadow .4s var(--ease);}
+.blog-featured:hover{box-shadow:var(--shadow);}
+@media (max-width:800px){.blog-featured{grid-template-columns:1fr;}}
+.blog-featured .fimg{background:linear-gradient(160deg,var(--tint),var(--bg-2));display:flex;align-items:center;justify-content:center;min-height:260px;padding:30px;}
+.blog-featured .fimg img{height:180px;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(11,32,39,.15));}
+.blog-featured .fbody{padding:38px;display:flex;flex-direction:column;justify-content:center;}
+.blog-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--tint);color:var(--brand);padding:5px 11px;border-radius:20px;margin-bottom:14px;width:fit-content;}
+.blog-featured h2{font-size:clamp(22px,2.6vw,28px);line-height:1.2;}
+.blog-featured p{margin-top:12px;font-size:14px;}
+.blog-meta{margin-top:18px;font-size:12px;color:var(--ink-dim);display:flex;gap:10px;align-items:center;}
+.blog-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--ink-dim);}
+
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media (max-width:960px){.blog-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){.blog-grid{grid-template-columns:1fr;}}
+.blog-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .35s var(--ease),box-shadow .35s var(--ease);}
+.blog-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+.blog-card .cimg{height:150px;background:linear-gradient(160deg,var(--tint),var(--bg-2));display:flex;align-items:center;justify-content:center;padding:18px;}
+.blog-card .cimg img{height:100%;object-fit:contain;}
+.blog-card .cbody{padding:20px;}
+.blog-card h3{font-size:16.5px;font-weight:500;line-height:1.3;margin-top:12px;}
+.blog-card p{font-size:12.5px;margin-top:8px;}
+
+.notice{background:var(--bg-2);border:1px dashed var(--line);border-radius:14px;padding:16px 20px;font-size:12.5px;color:var(--ink-dim);text-align:center;margin-top:40px;}
+
+footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0 28px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px;padding-bottom:44px;border-bottom:1px solid var(--line);}
+@media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.foot-grid{grid-template-columns:1fr;}}
+.foot-brand p{margin-top:16px;color:var(--ink-dim);font-size:13px;max-width:270px;}
+footer h5{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px;font-weight:600;}
+footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+footer a{font-size:13.5px;color:var(--ink-soft);transition:color .25s;}
+footer a:hover{color:var(--brand);}
+.foot-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink-dim);}
+.foot-bottom .disc{max-width:720px;line-height:1.6;}
+.pay-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:28px 0;border-bottom:1px solid var(--line);}
+.pay-label{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);margin-right:4px;}
+.pay-pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:7px 14px;background:var(--bg-2);}
+.pay-note{font-size:12px;color:var(--ink-dim);margin-left:6px;}
+
+#gate{position:fixed;inset:0;z-index:999;background:rgba(11,32,39,0.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;transition:opacity .5s,visibility .5s;}
+#gate.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.gate-card{max-width:460px;width:100%;background:#fff;border-radius:20px;padding:40px;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,.3);}
+.gate-mark{height:34px;margin:0 auto 22px;}
+.gate-card h2{font-size:22px;margin-bottom:12px;}
+.gate-card p{font-size:14px;margin-bottom:8px;}
+.gate-th{font-size:11.5px;color:var(--ink-dim);margin-top:14px;line-height:1.6;}
+.gate-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.gate-actions button{flex:1;min-width:150px;}
+#scrollbar{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--brand);z-index:1000;}
+</style>
+</head>
+<body>
+<div id="scrollbar"></div>
+
+<div id="gate">
+  <div class="gate-card">
+    <img class="gate-mark" src="images/logo/icon.png" alt="DefiningLife">
+    <h2>Research Use Only · 21+</h2>
+    <p>Everything supplied by <strong>DefiningLife</strong> is intended strictly for laboratory research. Not a drug, medicine, or dietary supplement — not for human or animal consumption.</p>
+    <p class="gate-th">By entering you confirm you are 21 years or older and purchasing solely for legitimate research purposes.</p>
+    <div class="gate-actions">
+      <button class="btn btn-ghost" onclick="window.location.href='https://www.google.com'">Leave site</button>
+      <button class="btn btn-primary" id="gateEnter">I'm 21+, Enter</button>
+    </div>
+  </div>
+</div>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="/" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife"></a>
+    <nav class="links" id="navLinks">
+      <a href="/shop">Shop</a>
+      <a href="/calculator">Calculator</a>
+      <a href="/blog" class="active">Blog</a>
+      <a href="/contact">Contact</a>
+      <a href="/login">My Account</a>
+    </nav>
+    <div class="head-actions">
+      <a href="/shop" class="btn btn-primary" style="padding:11px 20px;font-size:13px;">Shop Peptides</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> / Blog</div>
+    <div class="eyebrow">The Research Journal</div>
+    <h1>Notes on peptide research.</h1>
+    <p class="sub">Protocols, reading, and updates from the DefiningLife team — for researchers, by researchers.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <a href="#" class="blog-featured reveal">
+      <div class="fimg"><img src="images/products/bpc-157-10mg.webp" alt="BPC-157"></div>
+      <div class="fbody">
+        <span class="blog-tag">Featured</span>
+        <h2>Reading a Certificate of Analysis: what the numbers actually mean</h2>
+        <p>A practical walkthrough of HPLC/MS reports — what purity percentage really measures, how to spot a re-tested batch, and the questions worth asking your supplier.</p>
+        <div class="blog-meta"><span>DefiningLife Team</span><span class="dot"></span><span>8 min read</span></div>
+      </div>
+    </a>
+
+    <div class="blog-grid stagger">
+      <a href="#" class="blog-card reveal" style="--i:0">
+        <div class="cimg"><img src="images/products/tb-500-5mg.webp" alt="TB-500"></div>
+        <div class="cbody">
+          <span class="blog-tag">Recovery</span>
+          <h3>TB-500 vs BPC-157: mechanism, half-life, and how they differ</h3>
+          <p>Two of the most-studied recovery peptides, side by side.</p>
+        </div>
+      </a>
+      <a href="#" class="blog-card reveal" style="--i:1">
+        <div class="cimg"><img src="images/products/nad-plus-1000mg.webp" alt="NAD+"></div>
+        <div class="cbody">
+          <span class="blog-tag">Longevity</span>
+          <h3>NAD+ in cellular energy research: a primer</h3>
+          <p>Where the coenzyme fits in current metabolic-aging literature.</p>
+        </div>
+      </a>
+      <a href="#" class="blog-card reveal" style="--i:2">
+        <div class="cimg"><img src="images/products/semax-11mg.webp" alt="Semax"></div>
+        <div class="cbody">
+          <span class="blog-tag">Cognitive</span>
+          <h3>Nootropic peptides: Semax and Selank compared</h3>
+          <p>Neurotrophic mechanisms and what the research says so far.</p>
+        </div>
+      </a>
+      <a href="#" class="blog-card reveal" style="--i:3">
+        <div class="cimg"><img src="images/products/bac-water-10ml.webp" alt="Bacteriostatic water"></div>
+        <div class="cbody">
+          <span class="blog-tag">Protocol</span>
+          <h3>Reconstitution basics: water, storage, and stability windows</h3>
+          <p>A step-by-step guide to preparing lyophilized peptides correctly.</p>
+        </div>
+      </a>
+      <a href="#" class="blog-card reveal" style="--i:4">
+        <div class="cimg"><img src="images/products/epitalon-20mg.webp" alt="Epitalon"></div>
+        <div class="cbody">
+          <span class="blog-tag">Longevity</span>
+          <h3>Epitalon and the telomerase research landscape</h3>
+          <p>What the tetrapeptide literature covers, and what it doesn't yet.</p>
+        </div>
+      </a>
+      <a href="#" class="blog-card reveal" style="--i:5">
+        <div class="cimg"><img src="images/products/thymosin-alpha-1-10mg.webp" alt="Thymosin Alpha-1"></div>
+        <div class="cbody">
+          <span class="blog-tag">Immune</span>
+          <h3>Thymosin Alpha-1: three decades of immune-signalling study</h3>
+          <p>A history of one of the longest-studied research peptides.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="notice">More articles publish regularly — check back soon, or follow us on LINE for updates.</div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife" style="height:26px;"></a>
+        <p>Pharmaceutical-grade research peptides, independently verified and dispatched from a single certified source. Research use only.</p>
+      </div>
+      <div><h5>Shop</h5><ul><li><a href="/shop">All Peptides</a></li><li><a href="/shop">TB-500</a></li><li><a href="/shop">BPC-157</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="/blog">Blog</a></li><li><a href="/calculator">Calculator</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div><h5>Get in Touch</h5><ul><li><a href="mailto:support@defininglife.com">support@defininglife.com</a></li><li><a href="https://line.me/R/ti/p/@defininglife" target="_blank" rel="noopener">LINE: @defininglife</a></li><li><a href="/contact">Contact Form</a></li></ul></div>
+    </div>
+    <div class="pay-row">
+      <span class="pay-label">We Accept</span>
+      <span class="pay-pill">Revolut</span>
+      <span class="pay-pill">Wise Transfer</span>
+      <span class="pay-pill">PayPal</span>
+      <span class="pay-pill">Scan &amp; Pay (QR)</span>
+      <span class="pay-note">No online checkout — message us on the form or LINE to arrange payment.</span>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 DefiningLife. All rights reserved.</span>
+      <span class="disc">All products supplied strictly for laboratory research purposes only. Not for human or veterinary consumption. Not evaluated by the FDA.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var gate=document.getElementById('gate'); var ok=false;
+  try{ ok = localStorage.getItem('dl_gate_ok')==='1'; }catch(e){}
+  if(ok) gate.classList.add('hide');
+  document.getElementById('gateEnter').addEventListener('click', function(){
+    gate.classList.add('hide'); try{ localStorage.setItem('dl_gate_ok','1'); }catch(e){}
+  });
+
+  var h=document.getElementById('siteHeader');
+  window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY>24); }, {passive:true});
+
+  var bar=document.getElementById('scrollbar');
+  window.addEventListener('scroll', function(){
+    var d=document.documentElement; var pct=d.scrollTop/(d.scrollHeight-d.clientHeight)*100;
+    bar.style.width=(isFinite(pct)?pct:0)+'%';
+  }, {passive:true});
+
+  var burger=document.getElementById('burger'); var nav=document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = nav.style.display==='flex'; nav.style.display = open?'':'flex';
+    if(!open){ nav.style.position='fixed'; nav.style.top='66px'; nav.style.left='16px'; nav.style.right='16px';
+      nav.style.background='#fff'; nav.style.flexDirection='column'; nav.style.gap='16px'; nav.style.padding='22px';
+      nav.style.borderRadius='14px'; nav.style.boxShadow='0 20px 50px rgba(0,0,0,.15)'; }
+  });
+  function check(){
+    if(window.innerWidth<=860){ burger.style.display='flex'; nav.style.display='none'; }
+    else{ burger.style.display='none'; nav.style.display='flex'; nav.style.position='static'; nav.style.boxShadow='none'; nav.style.padding='0'; }
+  }
+  check(); window.addEventListener('resize', check);
+
+  var els=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  els.forEach(function(el){ io.observe(el); });
+});
+</script>
+</body>
+</html>

@@ -53,6 +53,13 @@ a{color:inherit;text-decoration:none;}
 .lg-sheen::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 42%);pointer-events:none;z-index:1;mix-blend-mode:overlay;}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:999px;font-weight:600;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s;position:relative;isolation:isolate;overflow:hidden;}
+@media (max-width:480px){
+  .btn{padding:13px 18px;font-size:13.5px;}
+  .hero-cta{flex-direction:column;align-items:stretch;}
+  .hero-cta .btn{width:100%;}
+  .cta-band .actions{flex-direction:column;align-items:stretch;width:100%;}
+  .cta-band .actions .btn{width:100%;}
+}
 .btn::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 55%);pointer-events:none;mix-blend-mode:overlay;}
 .btn-primary{background:var(--ink);color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 1px rgba(255,255,255,.15),0 14px 30px -10px rgba(11,32,39,.5);}
 .btn-primary:hover{background:var(--brand);transform:translateY(-2px);}
@@ -184,8 +191,8 @@ section{padding:80px 0;}
 .arrival-card:hover{transform:translateY(-6px);}
 .arrival-visual{height:300px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden;position:relative;}
 @media (max-width:640px){.arrival-visual{height:220px;}.arrival-card{flex:0 0 260px;}}
-.arrival-visual img{height:100%;object-fit:contain;object-position:center;transform:scale(1.32);transition:transform .55s var(--ease);}
-.arrival-card:hover .arrival-visual img{transform:scale(1.48);}
+.arrival-visual img{height:92%;object-fit:contain;object-position:center;transform:scale(1);transition:transform .45s var(--ease);}
+.arrival-card:hover .arrival-visual img{transform:scale(1.12);}
 .arrival-card h4{font-family:'Fraunces';font-size:16px;font-weight:500;}
 .arrival-card p{font-size:12px;margin-top:4px;}
 .arrival-price{font-family:'Fraunces';font-size:14px;margin-top:10px;padding-top:10px;border-top:1px solid var(--glass-border);}

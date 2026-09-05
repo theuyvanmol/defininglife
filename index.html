@@ -66,15 +66,16 @@ nav.links a:hover,nav.links a.active{color:var(--ink);}
 .burger span,.burger span::before,.burger span::after{content:"";display:block;width:14px;height:1.4px;background:var(--ink);position:relative;}
 .burger span::before{position:absolute;top:-5px;}.burger span::after{position:absolute;top:5px;}
 
-.hero{position:relative;padding:120px 0 60px;}
+.hero{position:relative;padding:0 0 60px;}
 .hero-shell{
-  border-radius:32px;padding:0;position:relative;overflow:hidden;
+  border-radius:0;padding:0;position:relative;overflow:hidden;
   background:radial-gradient(ellipse 900px 600px at 15% 20%, rgba(63,134,168,.35), transparent 60%),
              radial-gradient(ellipse 700px 500px at 85% 80%, rgba(95,224,196,.18), transparent 60%),
              linear-gradient(160deg,#0A1B20,#0D2830 55%,#0A2024);
-  min-height:560px;border:1px solid rgba(255,255,255,.08);
+  min-height:640px;border-bottom:1px solid rgba(255,255,255,.08);
+  padding-top:104px;
 }
-.hero-top{display:flex;justify-content:space-between;align-items:flex-start;padding:36px 44px 0;position:relative;z-index:3;}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;padding:36px 0 0;position:relative;z-index:3;}
 .hero-top .htag{font-size:12px;font-weight:600;color:#8FD7C4;letter-spacing:.02em;max-width:280px;text-align:right;line-height:1.6;}
 .hero-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
 .hero-tri{position:absolute;border-style:solid;opacity:.10;}
@@ -85,9 +86,8 @@ nav.links a:hover,nav.links a.active{color:var(--ink);}
 .glint:nth-child(4){animation-delay:1.2s;}
 .glint:nth-child(5){animation-delay:1.8s;}
 @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.3);}}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center;position:relative;z-index:2;padding:26px 44px 44px;}
-@media (max-width:960px){.hero-grid{grid-template-columns:1fr;padding:20px 28px 36px;}.hero-top{padding:28px 28px 0;flex-direction:column;gap:14px;}.hero-top .htag{text-align:left;}}
-@media (max-width:640px){.hero-shell{border-radius:24px;}}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center;position:relative;z-index:2;padding:26px 0 60px;}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr;padding:20px 0 40px;}.hero-top{padding:28px 0 0;flex-direction:column;gap:14px;}.hero-top .htag{text-align:left;}}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--brand);margin-bottom:18px;background:var(--glass-strong);padding:8px 16px;border-radius:999px;border:1px solid var(--glass-border);}
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--mint);}
 h1.hero-title{font-size:clamp(32px,4.6vw,54px);line-height:1.08;letter-spacing:-.02em;max-width:520px;color:#F3FAF8;}
@@ -150,6 +150,10 @@ section{padding:80px 0;}
 .spot-spec span{font-size:10px;color:var(--ink-dim);text-transform:uppercase;}
 
 .arrivals{display:flex;gap:18px;overflow-x:auto;padding-bottom:8px;}
+.arrivals-wrap{overflow:hidden;width:100%;padding:6px 0 14px;}
+.arrivals-track{display:flex;gap:18px;width:max-content;animation:arrivalsScroll 40s linear infinite;}
+.arrivals-wrap:hover .arrivals-track{animation-play-state:paused;}
+@keyframes arrivalsScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .arrival-card{flex:0 0 260px;border-radius:18px;padding:20px;transition:transform .35s var(--ease);}
 .arrival-card:hover{transform:translateY(-5px);}
 .arrival-visual{height:120px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
@@ -194,6 +198,13 @@ footer a:hover{color:var(--brand);}
 .foot-bottom{padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--ink-dim);}
 .foot-bottom .disc{max-width:700px;line-height:1.6;}
 
+#splash{position:fixed;inset:0;z-index:1001;background:linear-gradient(160deg,#0A1B20,#0D2830 55%,#0A2024);display:flex;align-items:center;justify-content:center;transition:opacity .5s ease;}
+#splash.fade-out{opacity:0;pointer-events:none;}
+#splash .splash-icon{position:absolute;width:56px;opacity:0;transform:scale(.7);animation:splashIconIn .5s .05s ease forwards, splashIconOut .4s .75s ease forwards;}
+#splash .splash-horiz{position:absolute;height:32px;opacity:0;transform:scale(.94);filter:brightness(0) invert(1);animation:splashHorizIn .5s .65s ease forwards;}
+@keyframes splashIconIn{0%{opacity:0;transform:scale(.7);}100%{opacity:1;transform:scale(1);}}
+@keyframes splashIconOut{0%{opacity:1;}100%{opacity:0;}}
+@keyframes splashHorizIn{0%{opacity:0;transform:scale(.94);}100%{opacity:1;transform:scale(1);}}
 #gate{position:fixed;inset:0;z-index:999;background:rgba(21,94,127,0.35);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:24px;transition:opacity .5s,visibility .5s;}
 #gate.hide{opacity:0;visibility:hidden;pointer-events:none;}
 .gate-card{max-width:440px;width:100%;border-radius:24px;padding:40px;text-align:center;}
@@ -210,6 +221,11 @@ footer a:hover{color:var(--brand);}
 <body>
 <div class="mesh"><div class="blob blob1"></div><div class="blob blob2"></div><div class="blob blob3"></div></div>
 <div id="scrollbar"></div>
+
+<div id="splash">
+  <img class="splash-icon" src="images/logo/icon.png" alt="">
+  <img class="splash-horiz" src="images/logo/horizontal.png" alt="">
+</div>
 
 <div id="gate">
   <div class="gate-card glass-strong">
@@ -244,38 +260,36 @@ footer a:hover{color:var(--brand);}
 </header>
 
 <section class="hero">
-  <div class="wrap">
-    <div class="hero-shell">
-      <div class="hero-shapes">
-        <div class="hero-tri tri1"></div>
-        <div class="hero-tri tri2"></div>
-        <div class="glint" style="top:18%;left:38%;"></div>
-        <div class="glint" style="top:62%;left:52%;width:3px;height:3px;"></div>
-        <div class="glint" style="top:34%;left:60%;width:4px;height:4px;"></div>
-        <div class="glint" style="top:70%;left:70%;"></div>
-      </div>
-      <div class="hero-top">
-        <img src="images/logo/icon.png" alt="" style="height:22px;opacity:.9;filter:brightness(0) invert(1);">
-        <div class="htag">Explore the full catalog, verify any batch, and see why researchers choose a single certified source.</div>
-      </div>
-      <div class="hero-grid">
-        <div>
-          <div class="eyebrow">Third-Party Verified · Research Grade</div>
-          <h1 class="hero-title">Defining the standard for peptide research.</h1>
-          <p class="hero-sub">Pharmaceutical-grade research peptides in vials and pre-dosed pens — verified, tested, and dispatched with a certificate for every batch.</p>
-          <div class="hero-cta">
-            <a href="/shop" class="btn btn-primary">Shop the Collection</a>
-            <a href="/calculator" class="btn btn-glass">Try the Calculator</a>
-          </div>
-          <div class="hero-badge-pill">✓ <b>≥99% verified purity</b> on every batch we dispatch</div>
+  <div class="hero-shell">
+    <div class="hero-shapes">
+      <div class="hero-tri tri1"></div>
+      <div class="hero-tri tri2"></div>
+      <div class="glint" style="top:18%;left:38%;"></div>
+      <div class="glint" style="top:62%;left:52%;width:3px;height:3px;"></div>
+      <div class="glint" style="top:34%;left:60%;width:4px;height:4px;"></div>
+      <div class="glint" style="top:70%;left:70%;"></div>
+    </div>
+    <div class="hero-top wrap">
+      <img src="images/logo/icon.png" alt="" style="height:22px;opacity:.9;filter:brightness(0) invert(1);">
+      <div class="htag">Explore the full catalog, verify any batch, and see why researchers choose a single certified source.</div>
+    </div>
+    <div class="hero-grid wrap">
+      <div>
+        <div class="eyebrow">Third-Party Verified · Research Grade</div>
+        <h1 class="hero-title">Defining the standard for peptide research.</h1>
+        <p class="hero-sub">Pharmaceutical-grade research peptides in vials and pre-dosed pens — verified, tested, and dispatched with a certificate for every batch.</p>
+        <div class="hero-cta">
+          <a href="/shop" class="btn btn-primary">Shop the Collection</a>
+          <a href="/calculator" class="btn btn-glass">Try the Calculator</a>
         </div>
-        <div class="pen-stage reveal">
-          <div class="pen-glass-plate"></div>
-          <img src="images/products/tb-500-5mg.webp" alt="DefiningLife TB-500 5mg vial">
-          <div class="hero-float-card">
-            <div class="fc-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#5FE0C4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div><b>Batch Verified</b><span>HPLC/MS tested</span></div>
-          </div>
+        <div class="hero-badge-pill">✓ <b>≥99% verified purity</b> on every batch we dispatch</div>
+      </div>
+      <div class="pen-stage reveal">
+        <div class="pen-glass-plate"></div>
+        <img src="images/products/tb-500-5mg.webp" alt="DefiningLife TB-500 5mg vial">
+        <div class="hero-float-card">
+          <div class="fc-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#5FE0C4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><b>Batch Verified</b><span>HPLC/MS tested</span></div>
         </div>
       </div>
     </div>
@@ -382,29 +396,32 @@ footer a:hover{color:var(--brand);}
   </div>
 </section>
 
-<section>
+<section style="overflow:hidden;">
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">Just In</div>
       <h2>New on the bench.</h2>
     </div>
-    <div class="arrivals stagger">
-      <div class="arrival-card glass reveal" style="--i:0">
-        <div class="arrival-visual"><img src="images/products/slu-pp332-10mg.webp" alt="SLU-PP-332"></div>
-        <h4>SLU-PP-332 10mg</h4><p>ERR agonist for metabolic research.</p><div class="arrival-price">£40 /vial</div>
-      </div>
-      <div class="arrival-card glass reveal" style="--i:1">
-        <div class="arrival-visual"><img src="images/products/mots-c-10mg.webp" alt="MOTS-c"></div>
-        <h4>MOTS-c 10mg</h4><p>Mitochondrial-derived peptide.</p><div class="arrival-price">£25 /vial</div>
-      </div>
-      <div class="arrival-card glass reveal" style="--i:2">
-        <div class="arrival-visual"><img src="images/products/kpv-5mg.webp" alt="KPV"></div>
-        <h4>KPV 5mg</h4><p>Anti-inflammatory research peptide.</p><div class="arrival-price">£25 /vial</div>
-      </div>
-      <div class="arrival-card glass reveal" style="--i:3">
-        <div class="arrival-visual"><img src="images/products/5-amino-1mq-5mg.webp" alt="5-Amino-1MQ"></div>
-        <h4>5-Amino-1MQ 5mg</h4><p>NNMT inhibitor, metabolic research.</p><div class="arrival-price">£40 /vial</div>
-      </div>
+  </div>
+  <div class="arrivals-wrap">
+    <div class="arrivals-track">
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/slu-pp332-10mg.webp" alt="SLU-PP-332"></div><h4>SLU-PP-332 10mg</h4><p>ERR agonist for metabolic research.</p><div class="arrival-price">£40 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/mots-c-10mg.webp" alt="MOTS-c"></div><h4>MOTS-c 10mg</h4><p>Mitochondrial-derived peptide.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/kpv-5mg.webp" alt="KPV"></div><h4>KPV 5mg</h4><p>Anti-inflammatory research peptide.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/5-amino-1mq-5mg.webp" alt="5-Amino-1MQ"></div><h4>5-Amino-1MQ 5mg</h4><p>NNMT inhibitor, metabolic research.</p><div class="arrival-price">£40 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/bpc-157-10mg.webp" alt="BPC-157"></div><h4>BPC-157 10mg</h4><p>Reference standard for tissue-repair research.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/tb-500-5mg.webp" alt="TB-500"></div><h4>TB-500 5mg</h4><p>Thymosin Beta-4 fragment, recovery research.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/ghk-cu-50mg.webp" alt="GHK-Cu"></div><h4>GHK-Cu 50mg</h4><p>Copper peptide, dermal-repair research.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/semax-11mg.webp" alt="Semax"></div><h4>Semax 11mg</h4><p>Nootropic peptide, cognitive research.</p><div class="arrival-price">£25 /vial</div></div>
+      <!-- duplicate set for seamless infinite loop -->
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/slu-pp332-10mg.webp" alt="SLU-PP-332"></div><h4>SLU-PP-332 10mg</h4><p>ERR agonist for metabolic research.</p><div class="arrival-price">£40 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/mots-c-10mg.webp" alt="MOTS-c"></div><h4>MOTS-c 10mg</h4><p>Mitochondrial-derived peptide.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/kpv-5mg.webp" alt="KPV"></div><h4>KPV 5mg</h4><p>Anti-inflammatory research peptide.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/5-amino-1mq-5mg.webp" alt="5-Amino-1MQ"></div><h4>5-Amino-1MQ 5mg</h4><p>NNMT inhibitor, metabolic research.</p><div class="arrival-price">£40 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/bpc-157-10mg.webp" alt="BPC-157"></div><h4>BPC-157 10mg</h4><p>Reference standard for tissue-repair research.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/tb-500-5mg.webp" alt="TB-500"></div><h4>TB-500 5mg</h4><p>Thymosin Beta-4 fragment, recovery research.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/ghk-cu-50mg.webp" alt="GHK-Cu"></div><h4>GHK-Cu 50mg</h4><p>Copper peptide, dermal-repair research.</p><div class="arrival-price">£25 /vial</div></div>
+      <div class="arrival-card glass"><div class="arrival-visual"><img src="images/products/semax-11mg.webp" alt="Semax"></div><h4>Semax 11mg</h4><p>Nootropic peptide, cognitive research.</p><div class="arrival-price">£25 /vial</div></div>
     </div>
   </div>
 </section>
@@ -465,6 +482,17 @@ document.addEventListener('DOMContentLoaded', function(){
   var gate=document.getElementById('gate'); var ok=false;
   try{ ok = localStorage.getItem('dl_gate_ok')==='1'; }catch(e){}
   if(ok) gate.classList.add('hide');
+
+  var splash = document.getElementById('splash');
+  if(ok){
+    splash.style.display = 'none'; // returning visitor — skip the intro entirely
+  } else {
+    setTimeout(function(){
+      splash.classList.add('fade-out');
+      setTimeout(function(){ splash.style.display = 'none'; }, 500);
+    }, 1350);
+  }
+
   document.getElementById('gateEnter').addEventListener('click', function(){
     gate.classList.add('hide'); try{ localStorage.setItem('dl_gate_ok','1'); }catch(e){}
   });

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="images/logo/icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Log In — DefiningLife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --ink:#0B2027; --ink-soft:#547079; --ink-dim:#8DA3A9;
+  --bg:#FBFDFC; --bg-2:#F2F8F6; --surface:#FFFFFF;
+  --brand:#155E7F; --brand-2:#3F86A8; --tint:#EAF3F1;
+  --line:rgba(11,32,39,0.10);
+  --shadow:0 24px 60px -24px rgba(11,32,39,0.18);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+h1{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.015em;margin:0;color:var(--ink);font-size:24px;text-align:center;}
+p{line-height:1.6;color:var(--ink-soft);margin:0;}
+a{color:var(--brand);text-decoration:none;font-weight:600;}
+a:hover{text-decoration:underline;}
+.card{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:40px;box-shadow:var(--shadow);}
+@media (max-width:480px){.card{padding:28px 22px;}}
+.logo{display:flex;justify-content:center;margin-bottom:24px;}
+.logo img{height:28px;}
+.sub{text-align:center;margin-top:8px;font-size:13.5px;}
+.form-row{margin-top:20px;}
+.form-row label{display:block;font-size:12.5px;color:var(--ink-dim);margin-bottom:7px;font-weight:600;}
+.form-row input{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:var(--ink);font-size:14px;outline:none;transition:border-color .3s;}
+.form-row input:focus{border-color:var(--brand);}
+.btn{width:100%;margin-top:24px;padding:14px;border-radius:10px;border:none;background:var(--ink);color:#fff;font-weight:600;font-size:14.5px;cursor:pointer;transition:background .3s;}
+.btn:hover{background:var(--brand);}
+.btn:disabled{opacity:.6;cursor:not-allowed;}
+.foot-link{text-align:center;margin-top:22px;font-size:13.5px;color:var(--ink-soft);}
+#msg{margin-top:16px;padding:12px 14px;border-radius:10px;font-size:13px;display:none;}
+#msg.err{display:block;background:#FDECEC;color:#B3261E;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife"></div>
+  <h1>Welcome back</h1>
+  <p class="sub">Log in to view your orders and restock reminders.</p>
+
+  <form id="loginForm">
+    <div class="form-row"><label for="email">Email</label><input type="email" id="email" required></div>
+    <div class="form-row"><label for="password">Password</label><input type="password" id="password" required></div>
+    <button type="submit" class="btn" id="submitBtn">Log In</button>
+  </form>
+  <div id="msg"></div>
+
+  <div class="foot-link">Don't have an account? <a href="/signup">Create one</a></div>
+</div>
+
+<script>
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const form = document.getElementById('loginForm');
+const msg = document.getElementById('msg');
+const btn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async function(e){
+  e.preventDefault();
+  msg.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Logging in…';
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    btn.disabled = false; btn.textContent = 'Log In';
+    msg.className = 'err'; msg.textContent = error.message; msg.style.display = 'block';
+    return;
+  }
+
+  const { data: profile } = await supabaseClient
+    .from('profiles').select('role').eq('id', data.user.id).single();
+
+  window.location.href = (profile && profile.role === 'admin') ? 'admin.html' : 'dashboard.html';
+});
+
+// If already logged in, skip straight to the right dashboard
+(async function(){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (!session) return;
+  const { data: profile } = await supabaseClient
+    .from('profiles').select('role').eq('id', session.user.id).single();
+  window.location.href = (profile && profile.role === 'admin') ? 'admin.html' : 'dashboard.html';
+})();
+</script>
+</body>
+</html>

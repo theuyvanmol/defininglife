@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="images/logo/icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin — DefiningLife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --ink:#0B2027; --ink-soft:#547079; --ink-dim:#8DA3A9;
+  --bg:#FBFDFC; --bg-2:#F2F8F6; --surface:#FFFFFF;
+  --brand:#155E7F; --brand-2:#3F86A8; --tint:#EAF3F1;
+  --line:rgba(11,32,39,0.10); --line-soft:rgba(11,32,39,0.06);
+  --shadow:0 24px 60px -24px rgba(11,32,39,0.18);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.015em;margin:0;color:var(--ink);}
+p{line-height:1.6;color:var(--ink-soft);margin:0;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+@media (max-width:640px){.wrap{padding:0 20px;}}
+
+header{border-bottom:1px solid var(--line);padding:18px 0;background:var(--surface);}
+header .wrap{display:flex;align-items:center;justify-content:space-between;}
+.logo img{height:26px;}
+.head-user{display:flex;align-items:center;gap:14px;}
+.head-user span{font-size:13.5px;color:var(--ink-soft);}
+.admin-tag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--tint);color:var(--brand);padding:4px 10px;border-radius:999px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:.25s;}
+.btn:hover{border-color:var(--brand);color:var(--brand);}
+.btn-primary{background:var(--ink);color:#fff;border-color:var(--ink);}
+.btn-primary:hover{background:var(--brand);border-color:var(--brand);color:#fff;}
+.btn:disabled{opacity:.6;cursor:not-allowed;}
+
+main{padding:44px 0 80px;}
+.page-head{margin-bottom:36px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
+.page-head h1{font-size:28px;}
+.page-head p{margin-top:8px;font-size:14.5px;}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;}
+@media (max-width:860px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;}
+.stat-card b{display:block;font-family:'Fraunces';font-size:26px;font-weight:500;}
+.stat-card span{font-size:11.5px;color:var(--ink-dim);}
+
+.grid-2{display:grid;grid-template-columns:1fr 1.4fr;gap:26px;align-items:start;margin-bottom:44px;}
+@media (max-width:960px){.grid-2{grid-template-columns:1fr;}}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;}
+.panel h3{font-size:17px;margin-bottom:18px;}
+.form-row{margin-bottom:16px;}
+.form-row label{display:block;font-size:12px;color:var(--ink-dim);margin-bottom:6px;font-weight:600;}
+.form-row input,.form-row select{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;color:var(--ink);font-size:13.5px;outline:none;transition:border-color .3s;}
+.form-row input:focus,.form-row select:focus{border-color:var(--brand);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+#logMsg{margin-top:12px;padding:10px 13px;border-radius:9px;font-size:12.5px;display:none;}
+#logMsg.err{display:block;background:#FDECEC;color:#B3261E;}
+#logMsg.ok{display:block;background:var(--tint);color:var(--brand);}
+
+.section-title{font-size:18px;margin-bottom:16px;}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px;}
+table{width:100%;min-width:480px;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+thead th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-dim);padding:12px 16px;border-bottom:1px solid var(--line);background:var(--bg-2);}
+tbody td{padding:12px 16px;border-bottom:1px solid var(--line-soft);font-size:13px;}
+tbody tr:last-child td{border-bottom:none;}
+.empty{text-align:center;padding:40px 20px;color:var(--ink-dim);font-size:13.5px;}
+.loading{text-align:center;padding:60px 20px;color:var(--ink-dim);}
+.mono{font-family:monospace;font-size:12px;color:var(--ink-dim);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="/" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife"></a>
+    <div class="head-user">
+      <span class="admin-tag">Admin</span>
+      <span id="userEmail"></span>
+      <button class="btn btn-primary" id="signOutBtn">Sign Out</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <div>
+      <h1>Sales Dashboard</h1>
+      <p>Every confirmed order, logged manually after payment via LINE or the contact form.</p>
+    </div>
+  </div>
+
+  <div id="loadingState" class="loading">Loading dashboard…</div>
+
+  <div id="content" style="display:none;">
+    <div class="stat-row">
+      <div class="stat-card"><b id="statRevenue">£0</b><span>Total revenue</span></div>
+      <div class="stat-card"><b id="statOrders">0</b><span>Orders recorded</span></div>
+      <div class="stat-card"><b id="statItems">0</b><span>Items sold</span></div>
+      <div class="stat-card"><b id="statCustomers">0</b><span>Customers</span></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Log a Sale</h3>
+        <form id="logForm">
+          <div class="form-row">
+            <label for="custEmail">Customer email</label>
+            <input type="email" id="custEmail" placeholder="customer@email.com" required>
+          </div>
+          <div class="form-row"><label for="prodName">Product</label><input type="text" id="prodName" placeholder="BPC-157" required></div>
+          <div class="form-grid">
+            <div class="form-row"><label for="variant">Strength</label><input type="text" id="variant" placeholder="10mg"></div>
+            <div class="form-row">
+              <label for="format">Format</label>
+              <select id="format"><option value="vial">Vial</option><option value="pen">Pen</option></select>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-row"><label for="qty">Quantity</label><input type="number" id="qty" value="1" min="1" required></div>
+            <div class="form-row"><label for="price">Unit price (£)</label><input type="number" id="price" step="0.01" min="0" required></div>
+          </div>
+          <div class="form-row"><label for="odate">Order date</label><input type="date" id="odate" required></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;" id="logBtn">Log Sale</button>
+          <div id="logMsg"></div>
+        </form>
+        <p style="font-size:11.5px;margin-top:14px;">Customer must already have an account with this exact email — otherwise the order won't link to their dashboard, but will still count toward revenue.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Recent Orders</h3>
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>Date</th><th>Customer</th><th>Product</th><th>Qty</th><th>Total</th></tr></thead>
+          <tbody id="recentBody"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">All Customers</div>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Email</th><th>Name</th><th>Orders</th><th>Total Spent</th><th>Joined</th></tr></thead>
+      <tbody id="customersBody"></tbody>
+    </table>
+    </div>
+  </div>
+</main>
+
+<script>
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+document.getElementById('signOutBtn').addEventListener('click', async function(){
+  await supabaseClient.auth.signOut();
+  window.location.href = 'login.html';
+});
+document.getElementById('odate').valueAsDate = new Date();
+
+function fmtMoney(n){ return '£' + Number(n).toFixed(2); }
+
+let currentUserId = null;
+let allOrders = [];
+let allProfiles = [];
+
+async function loadAll(){
+  const { data: orders, error: oErr } = await supabaseClient
+    .from('orders').select('*').order('order_date', { ascending: false });
+  const { data: profiles, error: pErr } = await supabaseClient
+    .from('profiles').select('*').eq('role', 'customer');
+
+  if (oErr || pErr) {
+    document.getElementById('loadingState').textContent =
+      'Error loading data: ' + ((oErr && oErr.message) || (pErr && pErr.message));
+    return;
+  }
+  allOrders = orders || [];
+  allProfiles = profiles || [];
+  render();
+}
+
+function render(){
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+
+  const totalRevenue = allOrders.reduce((s,o) => s + Number(o.total_price), 0);
+  const totalItems = allOrders.reduce((s,o) => s + o.quantity, 0);
+  document.getElementById('statRevenue').textContent = fmtMoney(totalRevenue);
+  document.getElementById('statOrders').textContent = allOrders.length;
+  document.getElementById('statItems').textContent = totalItems;
+  document.getElementById('statCustomers').textContent = allProfiles.length;
+
+  const recentBody = document.getElementById('recentBody');
+  if (allOrders.length === 0) {
+    recentBody.innerHTML = '<tr><td colspan="5" class="empty">No sales logged yet.</td></tr>';
+  } else {
+    recentBody.innerHTML = allOrders.slice(0, 12).map(o => `
+      <tr>
+        <td>${o.order_date}</td>
+        <td class="mono">${o.customer_email}</td>
+        <td>${o.product_name}${o.variant_label ? ' ('+o.variant_label+')' : ''}</td>
+        <td>${o.quantity}</td>
+        <td>${fmtMoney(o.total_price)}</td>
+      </tr>
+    `).join('');
+  }
+
+  const spendByEmail = {};
+  const ordersByEmail = {};
+  allOrders.forEach(o => {
+    spendByEmail[o.customer_email] = (spendByEmail[o.customer_email] || 0) + Number(o.total_price);
+    ordersByEmail[o.customer_email] = (ordersByEmail[o.customer_email] || 0) + 1;
+  });
+
+  const custBody = document.getElementById('customersBody');
+  if (allProfiles.length === 0) {
+    custBody.innerHTML = '<tr><td colspan="5" class="empty">No customer accounts yet.</td></tr>';
+  } else {
+    custBody.innerHTML = allProfiles.map(p => `
+      <tr>
+        <td class="mono">${p.email}</td>
+        <td>${p.full_name || '—'}</td>
+        <td>${ordersByEmail[p.email] || 0}</td>
+        <td>${fmtMoney(spendByEmail[p.email] || 0)}</td>
+        <td>${new Date(p.created_at).toLocaleDateString()}</td>
+      </tr>
+    `).join('');
+  }
+}
+
+document.getElementById('logForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const msg = document.getElementById('logMsg');
+  const btn = document.getElementById('logBtn');
+  msg.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Logging…';
+
+  const custEmail = document.getElementById('custEmail').value.trim();
+  const matchedProfile = allProfiles.find(p => p.email.toLowerCase() === custEmail.toLowerCase());
+
+  const payload = {
+    customer_id: matchedProfile ? matchedProfile.id : null,
+    customer_email: custEmail,
+    product_name: document.getElementById('prodName').value.trim(),
+    variant_label: document.getElementById('variant').value.trim() || null,
+    format: document.getElementById('format').value,
+    quantity: parseInt(document.getElementById('qty').value, 10),
+    unit_price: parseFloat(document.getElementById('price').value),
+    order_date: document.getElementById('odate').value,
+    created_by: currentUserId
+  };
+
+  const { error } = await supabaseClient.from('orders').insert(payload);
+
+  btn.disabled = false; btn.textContent = 'Log Sale';
+
+  if (error) {
+    msg.className = 'err'; msg.textContent = error.message; msg.style.display = 'block';
+    return;
+  }
+
+  msg.className = 'ok';
+  msg.textContent = matchedProfile
+    ? 'Sale logged and linked to ' + custEmail + '\'s account.'
+    : 'Sale logged. No account found for that email yet — it\'ll link automatically once they sign up with it.';
+  msg.style.display = 'block';
+  document.getElementById('logForm').reset();
+  document.getElementById('odate').valueAsDate = new Date();
+
+  await loadAll();
+});
+
+(async function init(){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (!session) { window.location.href = 'login.html'; return; }
+
+  const { data: profile } = await supabaseClient
+    .from('profiles').select('*').eq('id', session.user.id).single();
+
+  if (!profile || profile.role !== 'admin') {
+    window.location.href = 'dashboard.html'; return;
+  }
+
+  currentUserId = session.user.id;
+  document.getElementById('userEmail').textContent = session.user.email;
+  await loadAll();
+})();
+</script>
+</body>
+</html>

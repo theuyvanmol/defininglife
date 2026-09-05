@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="images/logo/icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — DefiningLife</title>
+<meta name="description" content="Get in touch with DefiningLife for orders, batch questions, or bulk enquiries. Fill out the form or message us directly on LINE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B2027; --ink-soft:#547079; --ink-dim:#8DA3A9;
+  --bg:#FBFDFC; --bg-2:#F2F8F6; --surface:#FFFFFF;
+  --brand:#155E7F; --brand-2:#3F86A8; --tint:#EAF3F1;
+  --line:rgba(11,32,39,0.10); --line-soft:rgba(11,32,39,0.06);
+  --shadow:0 24px 60px -24px rgba(11,32,39,0.18);
+  --ease:cubic-bezier(.16,.8,.24,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.015em;margin:0;color:var(--ink);}
+p{line-height:1.7;color:var(--ink-soft);margin:0;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+@media (max-width:640px){.wrap{padding:0 20px;}}
+::selection{background:rgba(21,94,127,.15);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:8px;font-weight:600;font-size:14.5px;cursor:pointer;border:1px solid transparent;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-primary:hover{background:var(--brand);box-shadow:var(--shadow);}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand);}
+.btn-line{background:#06C755;color:#fff;}
+.btn-line:hover{background:#05a648;box-shadow:var(--shadow);}
+
+header{position:fixed;top:0;left:0;right:0;z-index:60;padding:22px 0;transition:padding .35s var(--ease),background .35s,box-shadow .35s;}
+header.scrolled{padding:14px 0;background:rgba(251,253,252,0.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);}
+header .wrap{display:flex;align-items:center;justify-content:space-between;}
+.logo img{height:28px;width:auto;display:block;}
+nav.links{display:flex;align-items:center;gap:34px;}
+nav.links a{font-size:13.5px;font-weight:600;color:var(--ink-soft);position:relative;transition:color .25s;}
+nav.links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--brand);transition:width .3s var(--ease);}
+nav.links a:hover,nav.links a.active{color:var(--ink);}
+nav.links a:hover::after,nav.links a.active::after{width:100%;}
+.head-actions{display:flex;align-items:center;gap:14px;}
+.burger{display:none;width:38px;height:38px;border-radius:8px;border:1px solid var(--line);align-items:center;justify-content:center;background:none;cursor:pointer;}
+.burger span,.burger span::before,.burger span::after{content:"";display:block;width:14px;height:1.4px;background:var(--ink);position:relative;}
+.burger span::before{position:absolute;top:-5px;}.burger span::after{position:absolute;top:5px;}
+
+.page-hero{position:relative;padding:158px 0 60px;overflow:hidden;}
+.page-hero::before{content:"";position:absolute;top:-140px;right:-160px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(21,94,127,0.07),transparent 68%);}
+.page-hero .wrap{position:relative;}
+.crumb{font-size:12px;color:var(--ink-dim);margin-bottom:16px;}
+.crumb a{color:var(--ink-soft);}
+.crumb a:hover{color:var(--brand);}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--brand);margin-bottom:18px;}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand);}
+.page-hero h1{font-size:clamp(30px,4.2vw,48px);line-height:1.08;max-width:680px;}
+.page-hero .sub{margin-top:16px;max-width:600px;font-size:15.5px;}
+
+section{padding:0 0 100px;}
+@media (max-width:768px){section{padding-bottom:70px;}}
+
+.line-banner{background:linear-gradient(120deg,#06C755,#05a648);border-radius:20px;padding:34px 38px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;color:#fff;margin-bottom:44px;}
+.line-banner .txt h3{color:#fff;font-size:20px;}
+.line-banner .txt p{color:rgba(255,255,255,.9);margin-top:6px;font-size:13.5px;}
+.line-banner .line-icon{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex:none;}
+
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+.form-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:40px;}
+.form-row{margin-bottom:20px;}
+.form-row label{display:block;font-size:12.5px;color:var(--ink-dim);margin-bottom:8px;font-weight:600;}
+.form-row input,.form-row textarea,.form-row select{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:var(--ink);font-family:'Inter';font-size:14px;outline:none;transition:border-color .3s;}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--brand);}
+.form-row textarea{resize:vertical;min-height:120px;}
+.form-note{margin-top:16px;font-size:12px;color:var(--ink-dim);}
+#formNote{margin-top:16px;padding:14px 16px;border-radius:10px;background:var(--tint);color:var(--brand);font-size:13.5px;font-weight:600;display:none;}
+#formNote.show{display:block;}
+
+.contact-info{display:flex;flex-direction:column;gap:18px;}
+.info-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;gap:16px;align-items:flex-start;transition:border-color .3s,box-shadow .3s;}
+.info-card:hover{border-color:var(--brand-2);box-shadow:var(--shadow);}
+.info-card .ic{width:38px;height:38px;border-radius:10px;background:var(--tint);display:flex;align-items:center;justify-content:center;flex:none;}
+.info-card h5{font-family:'Fraunces';font-size:16px;font-weight:500;margin-bottom:4px;}
+.info-card p{font-size:13px;}
+.info-card a.link{color:var(--brand);font-weight:600;}
+
+.note-box{background:var(--bg-2);border:1px dashed var(--line);border-radius:14px;padding:18px 20px;font-size:12.5px;color:var(--ink-dim);margin-top:6px;}
+
+footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0 28px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px;padding-bottom:44px;border-bottom:1px solid var(--line);}
+@media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.foot-grid{grid-template-columns:1fr;}}
+.foot-brand p{margin-top:16px;color:var(--ink-dim);font-size:13px;max-width:270px;}
+footer h5{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px;font-weight:600;}
+footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+footer a{font-size:13.5px;color:var(--ink-soft);transition:color .25s;}
+footer a:hover{color:var(--brand);}
+.foot-bottom{padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink-dim);}
+.foot-bottom .disc{max-width:720px;line-height:1.6;}
+.pay-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:28px 0;border-bottom:1px solid var(--line);}
+.pay-label{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim);margin-right:4px;}
+.pay-pill{font-size:12.5px;font-weight:600;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:7px 14px;background:var(--bg-2);}
+.pay-note{font-size:12px;color:var(--ink-dim);margin-left:6px;}
+
+#gate{position:fixed;inset:0;z-index:999;background:rgba(11,32,39,0.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;transition:opacity .5s,visibility .5s;}
+#gate.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.gate-card{max-width:460px;width:100%;background:#fff;border-radius:20px;padding:40px;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,.3);}
+.gate-mark{height:34px;margin:0 auto 22px;}
+.gate-card h2{font-size:22px;margin-bottom:12px;}
+.gate-card p{font-size:14px;margin-bottom:8px;}
+.gate-th{font-size:11.5px;color:var(--ink-dim);margin-top:14px;line-height:1.6;}
+.gate-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.gate-actions button{flex:1;min-width:150px;}
+#scrollbar{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--brand);z-index:1000;}
+</style>
+</head>
+<body>
+<div id="scrollbar"></div>
+
+<div id="gate">
+  <div class="gate-card">
+    <img class="gate-mark" src="images/logo/icon.png" alt="DefiningLife">
+    <h2>Research Use Only · 21+</h2>
+    <p>Everything supplied by <strong>DefiningLife</strong> is intended strictly for laboratory research. Not a drug, medicine, or dietary supplement — not for human or animal consumption.</p>
+    <p class="gate-th">By entering you confirm you are 21 years or older and purchasing solely for legitimate research purposes.</p>
+    <div class="gate-actions">
+      <button class="btn btn-ghost" onclick="window.location.href='https://www.google.com'">Leave site</button>
+      <button class="btn btn-primary" id="gateEnter">I'm 21+, Enter</button>
+    </div>
+  </div>
+</div>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="/" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife"></a>
+    <nav class="links" id="navLinks">
+      <a href="/shop">Shop</a>
+      <a href="/calculator">Calculator</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact" class="active">Contact</a>
+      <a href="/login">My Account</a>
+    </nav>
+    <div class="head-actions">
+      <a href="/shop" class="btn btn-primary" style="padding:11px 20px;font-size:13px;">Shop Peptides</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> / Contact</div>
+    <div class="eyebrow">Get in Touch</div>
+    <h1>Talk to the team.</h1>
+    <p class="sub">We don't process payment online — fill out the form or message us directly on LINE and we'll confirm stock, pricing, and payment together.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <a href="https://line.me/R/ti/p/@defininglife" target="_blank" rel="noopener" class="line-banner reveal">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div class="line-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3C6.48 3 2 6.58 2 11c0 3.9 3.5 7.17 8.24 7.85-.36 1.3-.36 1.3-.6 2.15-.05.2.16.36.34.26.9-.5 2.86-1.87 3.86-2.62.7.08 1.42.13 2.16.13 5.52 0 10-3.58 10-8 0-4.42-4.48-8-10-8z" fill="#fff"/></svg>
+        </div>
+        <div class="txt">
+          <h3>Message us on LINE</h3>
+          <p>Fastest way to reach us — quick replies, order confirmation, and payment details.</p>
+        </div>
+      </div>
+      <span class="btn" style="background:#fff;color:#06C755;">Open LINE →</span>
+    </a>
+
+    <div class="contact-grid">
+      <div class="form-card reveal">
+        <h2 style="font-size:22px;margin-bottom:22px;">Send a message</h2>
+        <form id="contactForm">
+          <div class="form-row"><label for="cName">Name</label><input type="text" id="cName" required></div>
+          <div class="form-row"><label for="cEmail">Email</label><input type="email" id="cEmail" required></div>
+          <div class="form-row"><label for="cSubject">Subject</label>
+            <select id="cSubject">
+              <option>General enquiry</option>
+              <option>Order / stock question</option>
+              <option>Payment &amp; delivery</option>
+              <option>Bulk / wholesale</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="form-row"><label for="cMsg">Message</label><textarea id="cMsg" required placeholder="Let us know what you're looking for — we'll confirm availability and next steps."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+          <div id="formNote">Message received — we typically reply within one business day, or reach us faster on LINE above.</div>
+          <p class="form-note">We'll never ask for payment through this form. All payment is arranged directly once your order is confirmed.</p>
+        </form>
+      </div>
+
+      <div class="contact-info reveal">
+        <div class="info-card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#155E7F" stroke-width="1.5"/><path d="M3 7l9 6 9-6" stroke="#155E7F" stroke-width="1.5"/></svg></div>
+          <div><h5>Email</h5><p><a class="link" href="mailto:support@defininglife.com">support@defininglife.com</a> — replies within one business day.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0112 5.5 5.5 5.5 0 0121.5 12c-2.5 4.5-9.5 9-9.5 9z" stroke="#155E7F" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <div><h5>Dispatch</h5><p>Same-day dispatch on confirmed orders, tracked shipping throughout.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#155E7F" stroke-width="1.5"/><path d="M9 9h6v6H9z" stroke="#155E7F" stroke-width="1.5"/></svg></div>
+          <div><h5>Payment</h5><p>Arranged directly after your order is confirmed — Revolut, Wise, PayPal, or Scan &amp; Pay. No online checkout.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#155E7F" stroke-width="1.5"/><path d="M12 8v4l3 2" stroke="#155E7F" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div><h5>Response time</h5><p>Monday–Saturday, usually within a few hours during business hours.</p></div>
+        </div>
+        <div class="note-box">Prefer not to use a form? Reach us directly on LINE (@defininglife) any time — it's the quickest way to get a reply.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="/" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife" style="height:26px;"></a>
+        <p>Pharmaceutical-grade research peptides, independently verified and dispatched from a single certified source. Research use only.</p>
+      </div>
+      <div><h5>Shop</h5><ul><li><a href="/shop">All Peptides</a></li><li><a href="/shop">TB-500</a></li><li><a href="/shop">BPC-157</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="/blog">Blog</a></li><li><a href="/calculator">Calculator</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div><h5>Get in Touch</h5><ul><li><a href="mailto:support@defininglife.com">support@defininglife.com</a></li><li><a href="https://line.me/R/ti/p/@defininglife" target="_blank" rel="noopener">LINE: @defininglife</a></li><li><a href="/contact">Contact Form</a></li></ul></div>
+    </div>
+    <div class="pay-row">
+      <span class="pay-label">We Accept</span>
+      <span class="pay-pill">Revolut</span>
+      <span class="pay-pill">Wise Transfer</span>
+      <span class="pay-pill">PayPal</span>
+      <span class="pay-pill">Scan &amp; Pay (QR)</span>
+      <span class="pay-note">No online checkout — message us on the form or LINE to arrange payment.</span>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 DefiningLife. All rights reserved.</span>
+      <span class="disc">All products supplied strictly for laboratory research purposes only. Not for human or veterinary consumption. Not evaluated by the FDA.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var gate=document.getElementById('gate'); var ok=false;
+  try{ ok = localStorage.getItem('dl_gate_ok')==='1'; }catch(e){}
+  if(ok) gate.classList.add('hide');
+  document.getElementById('gateEnter').addEventListener('click', function(){
+    gate.classList.add('hide'); try{ localStorage.setItem('dl_gate_ok','1'); }catch(e){}
+  });
+
+  var h=document.getElementById('siteHeader');
+  window.addEventListener('scroll', function(){ h.classList.toggle('scrolled', window.scrollY>24); }, {passive:true});
+
+  var bar=document.getElementById('scrollbar');
+  window.addEventListener('scroll', function(){
+    var d=document.documentElement; var pct=d.scrollTop/(d.scrollHeight-d.clientHeight)*100;
+    bar.style.width=(isFinite(pct)?pct:0)+'%';
+  }, {passive:true});
+
+  var burger=document.getElementById('burger'); var nav=document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = nav.style.display==='flex'; nav.style.display = open?'':'flex';
+    if(!open){ nav.style.position='fixed'; nav.style.top='66px'; nav.style.left='16px'; nav.style.right='16px';
+      nav.style.background='#fff'; nav.style.flexDirection='column'; nav.style.gap='16px'; nav.style.padding='22px';
+      nav.style.borderRadius='14px'; nav.style.boxShadow='0 20px 50px rgba(0,0,0,.15)'; }
+  });
+  function check(){
+    if(window.innerWidth<=860){ burger.style.display='flex'; nav.style.display='none'; }
+    else{ burger.style.display='none'; nav.style.display='flex'; nav.style.position='static'; nav.style.boxShadow='none'; nav.style.padding='0'; }
+  }
+  check(); window.addEventListener('resize', check);
+
+  var els=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  els.forEach(function(el){ io.observe(el); });
+
+  var form = document.getElementById('contactForm');
+  var note = document.getElementById('formNote');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    note.classList.add('show');
+    form.reset();
+  });
+});
+</script>
+</body>
+</html>

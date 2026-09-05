@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="images/logo/icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Account — DefiningLife</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --ink:#0B2027; --ink-soft:#547079; --ink-dim:#8DA3A9;
+  --bg:#FBFDFC; --bg-2:#F2F8F6; --surface:#FFFFFF;
+  --brand:#155E7F; --brand-2:#3F86A8; --tint:#EAF3F1;
+  --line:rgba(11,32,39,0.10); --line-soft:rgba(11,32,39,0.06);
+  --shadow:0 24px 60px -24px rgba(11,32,39,0.18);
+  --ease:cubic-bezier(.16,.8,.24,1);
+  --warn-bg:#FFF6E9; --warn-ink:#8A5A00; --warn-line:#F3DDB0;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-0.015em;margin:0;color:var(--ink);}
+p{line-height:1.6;color:var(--ink-soft);margin:0;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+@media (max-width:640px){.wrap{padding:0 20px;}}
+
+header{border-bottom:1px solid var(--line);padding:18px 0;background:var(--surface);}
+header .wrap{display:flex;align-items:center;justify-content:space-between;}
+.logo img{height:26px;}
+.head-user{display:flex;align-items:center;gap:14px;}
+.head-user span{font-size:13.5px;color:var(--ink-soft);}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:.25s;}
+.btn:hover{border-color:var(--brand);color:var(--brand);}
+.btn-primary{background:var(--ink);color:#fff;border-color:var(--ink);}
+.btn-primary:hover{background:var(--brand);border-color:var(--brand);color:#fff;}
+
+main{padding:44px 0 80px;}
+.page-head{margin-bottom:36px;}
+.page-head h1{font-size:28px;}
+.page-head p{margin-top:8px;font-size:14.5px;}
+
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:40px;}
+@media (max-width:700px){.stat-row{grid-template-columns:1fr;}}
+.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px;}
+.stat-card b{display:block;font-family:'Fraunces';font-size:28px;font-weight:500;}
+.stat-card span{font-size:12px;color:var(--ink-dim);}
+
+.section-title{font-size:18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;}
+
+.restock-list{display:flex;flex-direction:column;gap:10px;margin-bottom:44px;}
+.restock-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;padding:14px 18px;}
+.restock-item .info b{color:var(--warn-ink);font-family:'Fraunces';font-size:15px;font-weight:500;}
+.restock-item .info span{font-size:12.5px;color:#9A7328;display:block;margin-top:2px;}
+.restock-item .badge{font-size:11px;font-weight:700;color:#fff;background:#C9860E;padding:5px 11px;border-radius:999px;white-space:nowrap;}
+.no-restock{background:var(--tint);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--brand);}
+
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px;}
+table{width:100%;min-width:560px;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+thead th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-dim);padding:14px 18px;border-bottom:1px solid var(--line);background:var(--bg-2);}
+tbody td{padding:14px 18px;border-bottom:1px solid var(--line-soft);font-size:13.5px;}
+tbody tr:last-child td{border-bottom:none;}
+.empty{text-align:center;padding:50px 20px;color:var(--ink-dim);font-size:14px;}
+.loading{text-align:center;padding:60px 20px;color:var(--ink-dim);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="/" class="logo"><img src="images/logo/horizontal.png" alt="DefiningLife"></a>
+    <div class="head-user">
+      <span id="userEmail"></span>
+      <a href="/shop" class="btn">Shop</a>
+      <button class="btn btn-primary" id="signOutBtn">Sign Out</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <h1 id="welcomeMsg">My Account</h1>
+    <p>Your order history and restock reminders — all pulled from confirmed orders.</p>
+  </div>
+
+  <div id="loadingState" class="loading">Loading your account…</div>
+
+  <div id="content" style="display:none;">
+    <div class="stat-row">
+      <div class="stat-card"><b id="statOrders">0</b><span>Orders placed</span></div>
+      <div class="stat-card"><b id="statItems">0</b><span>Items purchased</span></div>
+      <div class="stat-card"><b id="statSpend">£0</b><span>Total spent</span></div>
+    </div>
+
+    <div class="section-title">Restock Reminders</div>
+    <div id="restockList" class="restock-list"></div>
+
+    <div class="section-title" style="margin-top:8px;">Order History</div>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Date</th><th>Product</th><th>Strength</th><th>Qty</th><th>Total</th></tr></thead>
+      <tbody id="ordersBody"></tbody>
+    </table>
+    </div>
+  </div>
+</main>
+
+<script>
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const RESTOCK_DAYS = 30; // suggest restocking a product ~30 days after last order
+
+document.getElementById('signOutBtn').addEventListener('click', async function(){
+  await supabaseClient.auth.signOut();
+  window.location.href = 'login.html';
+});
+
+function fmtMoney(n){ return '£' + Number(n).toFixed(2); }
+function daysAgo(dateStr){
+  const then = new Date(dateStr);
+  const now = new Date();
+  return Math.floor((now - then) / (1000*60*60*24));
+}
+
+(async function init(){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (!session) { window.location.href = 'login.html'; return; }
+
+  const { data: profile } = await supabaseClient
+    .from('profiles').select('*').eq('id', session.user.id).single();
+
+  if (profile && profile.role === 'admin') {
+    window.location.href = 'admin.html'; return;
+  }
+
+  document.getElementById('userEmail').textContent = session.user.email;
+  document.getElementById('welcomeMsg').textContent =
+    'Welcome back' + (profile && profile.full_name ? ', ' + profile.full_name.split(' ')[0] : '');
+
+  const { data: orders, error } = await supabaseClient
+    .from('orders')
+    .select('*')
+    .eq('customer_id', session.user.id)
+    .order('order_date', { ascending: false });
+
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+
+  if (error) {
+    document.getElementById('ordersBody').innerHTML =
+      '<tr><td colspan="5" class="empty">Couldn\'t load orders: ' + error.message + '</td></tr>';
+    return;
+  }
+
+  // ---- stats ----
+  const totalOrders = orders.length;
+  const totalItems = orders.reduce((s,o) => s + o.quantity, 0);
+  const totalSpend = orders.reduce((s,o) => s + Number(o.total_price), 0);
+  document.getElementById('statOrders').textContent = totalOrders;
+  document.getElementById('statItems').textContent = totalItems;
+  document.getElementById('statSpend').textContent = fmtMoney(totalSpend);
+
+  // ---- restock logic: most recent order per product, flagged if older than RESTOCK_DAYS ----
+  const lastByProduct = {};
+  orders.forEach(o => {
+    const key = o.product_name + (o.variant_label ? ' ' + o.variant_label : '');
+    if (!lastByProduct[key] || new Date(o.order_date) > new Date(lastByProduct[key].order_date)) {
+      lastByProduct[key] = o;
+    }
+  });
+  const restockCandidates = Object.entries(lastByProduct)
+    .map(([key, o]) => ({ key, order: o, days: daysAgo(o.order_date) }))
+    .filter(r => r.days >= RESTOCK_DAYS)
+    .sort((a,b) => b.days - a.days);
+
+  const restockList = document.getElementById('restockList');
+  if (restockCandidates.length === 0) {
+    restockList.innerHTML = '<div class="no-restock">Nothing due for restock yet — you\'re all set.</div>';
+  } else {
+    restockList.innerHTML = restockCandidates.map(r => `
+      <div class="restock-item">
+        <div class="info"><b>${r.key}</b><span>Last ordered ${r.days} days ago</span></div>
+        <a href="/contact" class="badge">Reorder →</a>
+      </div>
+    `).join('');
+  }
+
+  // ---- order history table ----
+  const tbody = document.getElementById('ordersBody');
+  if (orders.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty">No orders on file yet. Once your first order is confirmed, it\'ll show up here.</td></tr>';
+  } else {
+    tbody.innerHTML = orders.map(o => `
+      <tr>
+        <td>${o.order_date}</td>
+        <td>${o.product_name}</td>
+        <td>${o.variant_label || '—'}</td>
+        <td>${o.quantity}</td>
+        <td>${fmtMoney(o.total_price)}</td>
+      </tr>
+    `).join('');
+  }
+})();
+</script>
+</body>
+</html>

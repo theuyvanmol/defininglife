@@ -402,25 +402,26 @@ const PRODUCTS = {
     effectTime: "Not applicable \u2014 this is a reconstitution solvent, not a research compound with pharmacological activity.", research: "Standard laboratory reconstitution medium; see our Peptide Calculator for reconstitution ratios."
   },
   "retatrutide-pen": {
-    name: "Retatrutide", format: "pen", img: null,
+    name: "Retatrutide", format: "pen", img: "images/pens/retatrutide-pen-40mg.webp",
+    variantImages: {"20mg":"images/pens/retatrutide-pen-20mg.webp","40mg":"images/pens/retatrutide-pen-40mg.webp"},
     category: "metabolic", tag: "Weight Management", variants: [{label:"20mg",price:null},{label:"40mg",price:null}],
     summary: "Pre-dosed pen of the triple-receptor agonist (GLP-1/GIP/glucagon).", howItWorks: "Same triple-agonist mechanism as our Retatrutide vial, pre-dosed into a sealed pen for simplified handling.",
     effectTime: "Long-acting research compound; see the Retatrutide vial listing for detailed pharmacokinetic notes.", research: "See our Retatrutide vial page for the fuller research summary \u2014 this pen delivers the same compound pre-dosed."
   },
   "tirzepatide-pen": {
-    name: "Tirzepatide", format: "pen", img: null,
+    name: "Tirzepatide", format: "pen", img: "images/pens/tirzepatide-pen.webp",
     category: "metabolic", tag: "Weight Management", variants: [{label:"40mg",price:null}],
     summary: "Dual GIP/GLP-1 receptor agonist in a pre-dosed research pen.", howItWorks: "Studied as a dual agonist at GIP and GLP-1 receptors, researched for combined effects on insulin secretion and appetite signalling pathways.",
     effectTime: "Published data describes a long half-life (approximately 5 days), supporting infrequent-dosing research protocols.", research: "Tirzepatide has an extensive published clinical-trial record in metabolic research literature."
   },
   "semaglutide-pen": {
-    name: "Semaglutide", format: "pen", img: null,
+    name: "Semaglutide", format: "pen", img: "images/pens/semaglutide-pen.webp",
     category: "metabolic", tag: "Weight Management", variants: [{label:"5mg",price:null}],
     summary: "Long-acting GLP-1 receptor agonist, pre-dosed pen format.", howItWorks: "A GLP-1 receptor agonist studied for its effects on insulin secretion, gastric emptying, and appetite-regulation pathways.",
     effectTime: "Published half-life is approximately one week, among the longer-acting GLP-1 research compounds.", research: "One of the most extensively published GLP-1 agonists in metabolic research literature."
   },
   "hgh-pen": {
-    name: "HGH", format: "pen", img: null,
+    name: "HGH", format: "pen", img: "images/pens/hgh-pen.webp",
     category: "growth", tag: "Growth Hormone", variants: [{label:"50iu",price:null}],
     summary: "Human growth hormone research pen.", howItWorks: "Recombinant human growth hormone, studied for direct activity at GH receptors across multiple tissue types, distinct from secretagogue compounds that stimulate endogenous release.",
     effectTime: "Published half-life is short (a few hours) following administration, though downstream IGF-1 effects are studied over longer windows.", research: "Recombinant GH is among the most extensively characterized compounds in endocrinology research literature."
@@ -432,61 +433,61 @@ const PRODUCTS = {
     effectTime: "See HGH listing for detailed pharmacokinetic notes.", research: "See our HGH pen listing for the fuller research summary."
   },
   "ss-31-pen": {
-    name: "SS-31", format: "pen", img: null,
+    name: "SS-31", format: "pen", img: "images/pens/ss-31-pen.webp",
     category: "longevity", tag: "Longevity", variants: [{label:"10mg",price:null}],
     summary: "Mitochondria-targeted peptide, pre-dosed pen.", howItWorks: "Same cardiolipin-binding mechanism as our SS-31 vial, pre-dosed for research convenience.",
     effectTime: "See the SS-31 vial listing for detailed pharmacokinetic notes.", research: "See our SS-31 vial page for the fuller research summary."
   },
   "bpc-157-pen": {
-    name: "BPC-157", format: "pen", img: null,
+    name: "BPC-157", format: "pen", img: "images/pens/bpc-157-pen.webp",
     category: "recovery", tag: "Recovery", variants: [{label:"20mg",price:null}],
     summary: "Body Protection Compound, pre-dosed pen.", howItWorks: "Same mechanism as our BPC-157 vial \u2014 studied for angiogenesis and fibroblast-migration pathways in tissue-repair research.",
     effectTime: "See the BPC-157 vial listing for detailed pharmacokinetic notes.", research: "See our BPC-157 vial page for the fuller research summary."
   },
   "tb-500-pen": {
-    name: "TB-500", format: "pen", img: null,
+    name: "TB-500", format: "pen", img: "images/pens/tb-500-pen.webp",
     category: "recovery", tag: "Recovery", variants: [{label:"20mg",price:null}],
     summary: "Thymosin Beta-4 fragment, pre-dosed pen.", howItWorks: "Same actin-regulation mechanism as our TB-500 vial, pre-dosed for research convenience.",
     effectTime: "See the TB-500 vial listing for detailed pharmacokinetic notes.", research: "See our TB-500 vial page for the fuller research summary."
   },
   "ghk-cu-pen": {
-    name: "GHK-Cu", format: "pen", img: null,
+    name: "GHK-Cu", format: "pen", img: "images/pens/ghk-cu-pen.webp",
     category: "recovery", tag: "Skin & Repair", variants: [{label:"100mg",price:null}],
     summary: "Copper peptide, pre-dosed pen.", howItWorks: "Same collagen-signalling mechanism as our GHK-Cu vial, pre-dosed for research convenience.",
     effectTime: "See the GHK-Cu vial listing for detailed pharmacokinetic notes.", research: "See our GHK-Cu vial page for the fuller research summary."
   },
   "melanotan-ii-pen": {
-    name: "Melanotan II", format: "pen", img: null,
+    name: "Melanotan II", format: "pen", img: "images/pens/melanotan-ii-pen.webp",
     category: "immune", tag: "Hormonal", variants: [{label:"10mg",price:null}],
     summary: "Melanocortin receptor agonist, pre-dosed pen.", howItWorks: "A non-selective melanocortin receptor agonist, studied for activity at MC1R (pigmentation pathway research) and MC4R (appetite/sexual-response pathway research).",
     effectTime: "Published half-life data is limited; research protocols typically study repeated subcutaneous administration.", research: "One of the earlier melanocortin-pathway compounds studied, predating more receptor-selective analogs like PT-141."
   },
   "mots-c-pen": {
-    name: "MOTS-c", format: "pen", img: null,
+    name: "MOTS-c", format: "pen", img: "images/pens/mots-c-pen.webp",
     category: "metabolic", tag: "Metabolic", variants: [{label:"20mg",price:null}],
     summary: "Mitochondrial-derived peptide, pre-dosed pen.", howItWorks: "Same AMPK-signalling mechanism as our MOTS-c vial, pre-dosed for research convenience.",
     effectTime: "See the MOTS-c vial listing for detailed pharmacokinetic notes.", research: "See our MOTS-c vial page for the fuller research summary."
   },
   "nad-plus-pen": {
-    name: "NAD+", format: "pen", img: null,
+    name: "NAD+", format: "pen", img: "images/pens/nad-plus-pen.webp",
     category: "longevity", tag: "Longevity", variants: [{label:"1000mg",price:null}],
     summary: "Cellular-energy coenzyme, pre-dosed pen.", howItWorks: "Same coenzyme mechanism as our NAD+ vial, pre-dosed for research convenience.",
     effectTime: "See the NAD+ vial listing for detailed pharmacokinetic notes.", research: "See our NAD+ vial page for the fuller research summary."
   },
   "tesamorelin-pen": {
-    name: "Tesamorelin", format: "pen", img: null,
+    name: "Tesamorelin", format: "pen", img: "images/pens/tesamorelin-pen.webp",
     category: "growth", tag: "Growth Hormone", variants: [{label:"20mg",price:null}],
     summary: "GHRH analog, pre-dosed pen.", howItWorks: "Same GHRH-receptor mechanism as our Tesamorelin vial, pre-dosed for research convenience.",
     effectTime: "See the Tesamorelin vial listing for detailed pharmacokinetic notes.", research: "See our Tesamorelin vial page for the fuller research summary."
   },
   "wolverine-blend": {
-    name: "Wolverine", format: "pen", img: null,
+    name: "Wolverine", format: "pen", img: "images/pens/wolverine-blend.webp",
     category: "blend", tag: "Signature Blend", variants: [{label:"10mg BPC-157 + 10mg TB-500",price:null}],
     summary: "BPC-157 & TB-500 combined in one pre-dosed pen for recovery research.", howItWorks: "Combines two of the most-studied recovery peptides in a single pen \u2014 BPC-157's angiogenesis/fibroblast pathway research alongside TB-500's actin-regulation pathway research.",
     effectTime: "Reflects the combined pharmacokinetics of both component peptides; see each compound's individual listing for details.", research: "A popular pairing in recovery-focused research protocols, combining two independently well-studied compounds rather than a single novel formulation."
   },
   "klow-blend": {
-    name: "KLOW", format: "pen", img: null,
+    name: "KLOW", format: "pen", img: "images/pens/klow-blend.webp",
     category: "blend", tag: "Signature Blend", variants: [{label:"10mg TB-500 + 10mg BPC-157 + 10mg KPV + 50mg GHK-Cu",price:null}],
     summary: "TB-500, BPC-157, KPV and GHK-Cu combined for full-spectrum repair research.", howItWorks: "A four-compound blend combining systemic repair peptides (TB-500, BPC-157), an anti-inflammatory tripeptide (KPV), and a collagen-signalling copper peptide (GHK-Cu) in one pen.",
     effectTime: "Reflects the combined pharmacokinetics of four component peptides; see each compound's individual listing for details.", research: "A comprehensive research blend intended to cover multiple repair pathways simultaneously rather than a single mechanism."
@@ -616,6 +617,10 @@ document.addEventListener('DOMContentLoaded', function(){
         pill.classList.add('active');
         currentVariant = v;
         renderPrice();
+        if(product.variantImages && product.variantImages[v.label]){
+          var imgEl = document.querySelector('#pdVisualInner img');
+          if(imgEl) imgEl.src = product.variantImages[v.label];
+        }
       });
       pillsEl.appendChild(pill);
     });

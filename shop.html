@@ -97,6 +97,9 @@ section{padding:0 0 100px;}
 .prod-visual{height:320px;background:linear-gradient(160deg,var(--tint),var(--bg-2));display:flex;align-items:center;justify-content:center;position:relative;padding:20px;overflow:hidden;}
 @media (max-width:640px){.prod-visual{height:240px;}}
 .prod-visual-pen{background:linear-gradient(160deg,#E4EEF0,var(--bg-2));}
+.prod-visual.prod-visual-pen{height:210px;padding:16px;}
+@media (max-width:640px){.prod-visual.prod-visual-pen{height:170px;}}
+.prod-visual-pen img{width:100%;height:auto;max-height:100%;object-fit:contain;}
 .prod-visual img,.prod-visual svg{height:92%;width:auto;max-width:92%;object-fit:contain;object-position:center;transition:transform .45s var(--ease);position:relative;z-index:1;transform:scale(1);}
 .prod-card:hover .prod-visual img,.prod-card:hover .prod-visual svg{transform:scale(1.12);}
 .prod-visual::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .8s var(--ease);z-index:2;pointer-events:none;}
@@ -589,7 +592,7 @@ footer a:hover{color:var(--brand);}
       <div class="prod-grid stagger" id="penGrid">
       <div class="prod-card reveal" data-cat="metabolic" data-variants="[{&quot;label&quot;: &quot;20mg&quot;, &quot;price&quot;: null}, {&quot;label&quot;: &quot;40mg&quot;, &quot;price&quot;: null}]" style="--i:0">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Weight Management</span><span class="prod-new">Pen</span>
-          <img src="images/pens/retatrutide-pen-20mg.webp" alt="DefiningLife Retatrutide pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/retatrutide-pen-20mg.webp" alt="DefiningLife Retatrutide pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>Retatrutide <span class="mg js-mg">20mg</span></h3>
@@ -600,7 +603,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="metabolic" data-variants="[{&quot;label&quot;: &quot;40mg&quot;, &quot;price&quot;: null}]" style="--i:1">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Weight Management</span><span class="prod-new">Pen</span>
-          <img src="images/pens/tirzepatide-pen.webp" alt="DefiningLife Tirzepatide pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/tirzepatide-pen.webp" alt="DefiningLife Tirzepatide pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>Tirzepatide <span class="mg js-mg">40mg</span></h3>
@@ -611,7 +614,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="metabolic" data-variants="[{&quot;label&quot;: &quot;5mg&quot;, &quot;price&quot;: null}]" style="--i:2">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Weight Management</span><span class="prod-new">Pen</span>
-          <img src="images/pens/semaglutide-pen.webp" alt="DefiningLife Semaglutide pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/semaglutide-pen.webp" alt="DefiningLife Semaglutide pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>Semaglutide <span class="mg js-mg">5mg</span></h3>
@@ -622,7 +625,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="growth" data-variants="[{&quot;label&quot;: &quot;50iu&quot;, &quot;price&quot;: null}]" style="--i:3">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Growth Hormone</span><span class="prod-new">Pen</span>
-          <img src="images/pens/hgh-pen.webp" alt="DefiningLife HGH pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/hgh-pen.webp" alt="DefiningLife HGH pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>HGH <span class="mg js-mg">50iu</span></h3>
@@ -655,7 +658,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="longevity" data-variants="[{&quot;label&quot;: &quot;10mg&quot;, &quot;price&quot;: null}]" style="--i:5">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Longevity</span><span class="prod-new">Pen</span>
-          <img src="images/pens/ss-31-pen.webp" alt="DefiningLife SS-31 pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/ss-31-pen.webp" alt="DefiningLife SS-31 pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>SS-31 <span class="mg js-mg">10mg</span></h3>
@@ -666,7 +669,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="recovery" data-variants="[{&quot;label&quot;: &quot;20mg&quot;, &quot;price&quot;: null}]" style="--i:0">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Recovery</span><span class="prod-new">Pen</span>
-          <img src="images/pens/bpc-157-pen.webp" alt="DefiningLife BPC-157 pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/bpc-157-pen.webp" alt="DefiningLife BPC-157 pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>BPC-157 <span class="mg js-mg">20mg</span></h3>
@@ -677,7 +680,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="recovery" data-variants="[{&quot;label&quot;: &quot;20mg&quot;, &quot;price&quot;: null}]" style="--i:1">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Recovery</span><span class="prod-new">Pen</span>
-          <img src="images/pens/tb-500-pen.webp" alt="DefiningLife TB-500 pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/tb-500-pen.webp" alt="DefiningLife TB-500 pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>TB-500 <span class="mg js-mg">20mg</span></h3>
@@ -688,7 +691,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="recovery" data-variants="[{&quot;label&quot;: &quot;100mg&quot;, &quot;price&quot;: null}]" style="--i:2">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Skin & Repair</span><span class="prod-new">Pen</span>
-          <img src="images/pens/ghk-cu-pen.webp" alt="DefiningLife GHK-Cu pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/ghk-cu-pen.webp" alt="DefiningLife GHK-Cu pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>GHK-Cu <span class="mg js-mg">100mg</span></h3>
@@ -699,7 +702,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="immune" data-variants="[{&quot;label&quot;: &quot;10mg&quot;, &quot;price&quot;: null}]" style="--i:3">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Hormonal</span><span class="prod-new">Pen</span>
-          <img src="images/pens/melanotan-ii-pen.webp" alt="DefiningLife Melanotan II pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/melanotan-ii-pen.webp" alt="DefiningLife Melanotan II pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>Melanotan II <span class="mg js-mg">10mg</span></h3>
@@ -710,7 +713,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="metabolic" data-variants="[{&quot;label&quot;: &quot;20mg&quot;, &quot;price&quot;: null}]" style="--i:4">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Metabolic</span><span class="prod-new">Pen</span>
-          <img src="images/pens/mots-c-pen.webp" alt="DefiningLife MOTS-c pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/mots-c-pen.webp" alt="DefiningLife MOTS-c pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>MOTS-c <span class="mg js-mg">20mg</span></h3>
@@ -721,7 +724,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="longevity" data-variants="[{&quot;label&quot;: &quot;1000mg&quot;, &quot;price&quot;: null}]" style="--i:5">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Longevity</span><span class="prod-new">Pen</span>
-          <img src="images/pens/nad-plus-pen.webp" alt="DefiningLife NAD+ pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/nad-plus-pen.webp" alt="DefiningLife NAD+ pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>NAD+ <span class="mg js-mg">1000mg</span></h3>
@@ -732,7 +735,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="growth" data-variants="[{&quot;label&quot;: &quot;20mg&quot;, &quot;price&quot;: null}]" style="--i:0">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Growth Hormone</span><span class="prod-new">Pen</span>
-          <img src="images/pens/tesamorelin-pen.webp" alt="DefiningLife Tesamorelin pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/tesamorelin-pen.webp" alt="DefiningLife Tesamorelin pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>Tesamorelin <span class="mg js-mg">20mg</span></h3>
@@ -743,7 +746,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="blend" data-variants="[{&quot;label&quot;: &quot;10mg BPC-157 + 10mg TB-500&quot;, &quot;price&quot;: null}]" style="--i:0">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Signature Blend</span><span class="prod-new">Pen</span>
-          <img src="images/pens/wolverine-blend.webp" alt="DefiningLife Wolverine pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/wolverine-blend.webp" alt="DefiningLife Wolverine pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>Wolverine <span class="mg js-mg">10mg BPC-157 + 10mg TB-500</span></h3>
@@ -754,7 +757,7 @@ footer a:hover{color:var(--brand);}
       </div>
       <div class="prod-card reveal" data-cat="blend" data-variants="[{&quot;label&quot;: &quot;10mg TB-500 + 10mg BPC-157 + 10mg KPV + 50mg GHK-Cu&quot;, &quot;price&quot;: null}]" style="--i:1">
         <div class="prod-visual prod-visual-pen"><span class="prod-cat">Signature Blend</span><span class="prod-new">Pen</span>
-          <img src="images/pens/klow-blend.webp" alt="DefiningLife KLOW pen" loading="lazy" style="width:92%;height:auto;">
+          <img src="images/pens/klow-blend.webp" alt="DefiningLife KLOW pen" loading="lazy">
         </div>
         <div class="prod-body">
           <h3>KLOW <span class="mg js-mg">10mg TB-500 + 10mg BPC-157 + 10mg KPV + 50mg GHK-Cu</span></h3>

@@ -113,17 +113,20 @@ nav.links a:hover,nav.links a.active{color:var(--ink);}
 .burger span,.burger span::before,.burger span::after{content:"";display:block;width:14px;height:1.4px;background:var(--ink);position:relative;}
 .burger span::before{position:absolute;top:-5px;}.burger span::after{position:absolute;top:5px;}
 
-.hero{position:relative;padding:0 0 60px;}
+.hero{position:relative;padding:0;}
 .hero-shell{
   border-radius:0;padding:0;position:relative;overflow:hidden;
   background:linear-gradient(160deg,#0A1B20,#0D2830 55%,#0A2024);
-  min-height:640px;border-bottom:1px solid rgba(255,255,255,.08);
-  padding-top:104px;
+  min-height:100vh;border-bottom:1px solid rgba(255,255,255,.08);
+  padding-top:104px;display:flex;flex-direction:column;
 }
-#heroGradient{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+@media (max-height:700px){.hero-shell{min-height:760px;}}
+.hero-bg-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;z-index:0;}
+.hero-bg-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg, rgba(6,17,20,.94) 0%, rgba(6,17,20,.78) 32%, rgba(6,17,20,.42) 58%, rgba(6,17,20,.12) 82%, transparent 100%), linear-gradient(0deg, rgba(6,17,20,.7) 0%, transparent 22%);}
+#heroGradient{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0;}
 .hero-top{display:flex;justify-content:space-between;align-items:flex-start;padding:36px 0 0;position:relative;z-index:3;}
 .hero-top .htag{font-size:12px;font-weight:600;color:#8FD7C4;letter-spacing:.02em;max-width:280px;text-align:right;line-height:1.6;}
-.hero-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+.hero-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;display:none;}
 .hero-tri{position:absolute;border-style:solid;opacity:.10;}
 .tri1{bottom:-40px;left:8%;border-width:0 90px 140px 90px;border-color:transparent transparent #5FE0C4 transparent;transform:rotate(8deg);}
 .tri2{bottom:20px;left:26%;border-width:0 50px 80px 50px;border-color:transparent transparent #3F86A8 transparent;transform:rotate(-6deg);}
@@ -132,32 +135,29 @@ nav.links a:hover,nav.links a.active{color:var(--ink);}
 .glint:nth-child(4){animation-delay:1.2s;}
 .glint:nth-child(5){animation-delay:1.8s;}
 @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8);}50%{opacity:1;transform:scale(1.3);}}
-.hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:20px;align-items:center;position:relative;z-index:2;padding:26px 0 60px;}
-@media (max-width:960px){.hero-grid{grid-template-columns:1fr;padding:20px 0 40px;}.hero-top{padding:28px 0 0;flex-direction:column;gap:14px;}.hero-top .htag{text-align:left;}}
+.hero-grid{display:block;position:relative;z-index:2;padding:40px 0 80px;flex:1;display:flex;align-items:center;}
+.hero-grid>div:first-child{max-width:600px;}
+@media (max-width:960px){.hero-top{padding:28px 0 0;flex-direction:column;gap:14px;}.hero-top .htag{text-align:left;}}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--brand);margin-bottom:18px;background:var(--glass-strong);padding:8px 16px;border-radius:999px;border:1px solid var(--glass-border);}
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--mint);}
-h1.hero-title{font-size:clamp(32px,4.6vw,54px);line-height:1.08;letter-spacing:-.02em;max-width:520px;color:#F3FAF8;}
-.hero-sub{margin-top:18px;max-width:420px;font-size:15px;color:#A9C9C2;}
+h1.hero-title{font-size:clamp(34px,5.2vw,60px);line-height:1.06;letter-spacing:-.02em;max-width:560px;color:#F3FAF8;}
+.hero-sub{margin-top:18px;max-width:440px;font-size:15.5px;color:#C7DFDA;}
 .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
-.hero-shell .eyebrow{color:#9DF0DD;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);}
+.hero-shell .eyebrow{color:#9DF0DD;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18);}
 .hero-shell .eyebrow::before{background:#5FE0C4;box-shadow:0 0 8px 2px rgba(95,224,196,.6);}
 .hero-shell .hero-cta .btn-primary{background:rgba(255,255,255,.95);color:#0A1B20;box-shadow:inset 0 1px 1px #fff,0 14px 30px -10px rgba(0,0,0,.4);}
 .hero-shell .hero-cta .btn-primary:hover{background:#5FE0C4;color:#0A1B20;}
-.hero-shell .hero-cta .btn-glass{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff;}
-.hero-shell .hero-cta .btn-glass:hover{background:rgba(255,255,255,.16);}
+.hero-shell .hero-cta .btn-glass{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);color:#fff;}
+.hero-shell .hero-cta .btn-glass:hover{background:rgba(255,255,255,.18);}
 .hero-badge-pill{display:inline-flex;align-items:center;gap:8px;margin-top:34px;background:rgba(255,255,255,.1);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border:1px solid rgba(255,255,255,.32);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 10px 24px -12px rgba(0,0,0,.4);border-radius:999px;padding:10px 18px;font-size:12.5px;font-weight:600;color:#D7EEE8;position:relative;isolation:isolate;overflow:hidden;}
 .hero-badge-pill::before,.hero-float-card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 50%);pointer-events:none;mix-blend-mode:overlay;}
 .hero-badge-pill b{color:#9DF0DD;}
 
-.pen-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:340px;}
-.pen-glass-plate{position:absolute;width:120%;height:120%;border-radius:40%;background:radial-gradient(circle,rgba(95,224,196,.14),transparent 70%);filter:blur(20px);}
-.pen-stage img{width:100%;max-width:640px;position:relative;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));animation:floatY 7s ease-in-out infinite;}
-@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-.hero-float-card{position:absolute;bottom:4%;right:0%;background:rgba(255,255,255,.12);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 16px 34px -14px rgba(0,0,0,.45);border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:10px;max-width:190px;z-index:4;}
+.hero-float-card{position:absolute;bottom:6%;right:4%;background:rgba(255,255,255,.12);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),0 16px 34px -14px rgba(0,0,0,.45);border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:10px;max-width:190px;z-index:4;}
 .hero-float-card .fc-ic{width:26px;height:26px;border-radius:8px;background:rgba(95,224,196,.15);display:flex;align-items:center;justify-content:center;flex:none;}
 .hero-float-card b{display:block;font-size:12px;color:#fff;font-weight:600;}
 .hero-float-card span{font-size:10.5px;color:#9BBDB6;}
-@media (max-width:640px){.hero-float-card{position:static;margin-top:16px;max-width:none;}}
+@media (max-width:640px){.hero-float-card{position:absolute;bottom:3%;left:4%;right:4%;max-width:none;}}
 
 .hero-stats{display:flex;gap:0;margin-top:0;background:rgba(255,255,255,.06);border-radius:20px;border:1px solid rgba(255,255,255,.12);overflow:hidden;}
 .hero-stats .stat{flex:1;padding:16px 18px;text-align:center;border-right:1px solid rgba(255,255,255,.12);}
@@ -332,6 +332,8 @@ footer a:hover{color:var(--brand);}
 
 <section class="hero">
   <div class="hero-shell">
+    <img class="hero-bg-photo" src="images/hero-vials-full.webp" alt="DefiningLife research peptide vials — BPC-157, TB-500, CJC-1295, Ipamorelin, Retatrutide, Semax, Glutathione, Selank">
+    <div class="hero-bg-scrim"></div>
     <canvas id="heroGradient"></canvas>
     <div class="hero-shapes">
       <div class="hero-tri tri1"></div>
@@ -356,14 +358,10 @@ footer a:hover{color:var(--brand);}
         </div>
         <div class="hero-badge-pill">✓ <b>≥99% verified purity</b> on every batch we dispatch</div>
       </div>
-      <div class="pen-stage reveal">
-        <div class="pen-glass-plate"></div>
-        <img src="images/hero-vials-group.webp" alt="DefiningLife research peptide vials — BPC-157, TB-500, CJC-1295, Ipamorelin, Retatrutide, Semax, Glutathione, Selank">
-        <div class="hero-float-card">
-          <div class="fc-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#5FE0C4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div><b>Batch Verified</b><span>Every vial, HPLC/MS tested</span></div>
-        </div>
-      </div>
+    </div>
+    <div class="hero-float-card reveal">
+      <div class="fc-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#5FE0C4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><b>Batch Verified</b><span>Every vial, HPLC/MS tested</span></div>
     </div>
   </div>
 </section>
